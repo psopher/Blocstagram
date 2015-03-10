@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class BLCUser;
 
@@ -18,5 +19,9 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSArray *comments;
+
+//Below for Exercise 33 and beyond
+- (instancetype) initWithDictionary:(NSDictionary *)mediaDictionary;
+//Above for Exercise 33 and Beyond
 
 @end

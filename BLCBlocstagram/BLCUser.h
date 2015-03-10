@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface BLCUser : NSObject
 
@@ -15,5 +16,9 @@
 @property (nonatomic, strong) NSString *fullName;
 @property (nonatomic, strong) NSURL *profilePictureURL;
 @property (nonatomic, strong) UIImage *profilePicture;
+
+//Below for Exercise 33 and Beyond
+- (instancetype) initWithDictionary:(NSDictionary *)userDictionary;
+//Above for Exercise 33 and Beyond
 
 @end

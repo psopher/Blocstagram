@@ -9,7 +9,14 @@
 #import "AppDelegate.h"
 #import "BLCImagesTableViewController.h"
 
+//Below for Exercise 32 and Beyond
+#import "BLCLoginViewController.h"
+#import "BLCDataSource.h"
+
+//Above for Exercise 32 and Beyond
+
 @interface AppDelegate ()
+
 
 @end
 
@@ -19,7 +26,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[BLCImagesTableViewController alloc] init]];
+    
+    //Below used through exercise 31
+//    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[BLCImagesTableViewController alloc] init]];
+    //Above used through exercise 31
+    
+    //Below for Exercise 32 and Beyond
+    [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
+    UINavigationController *navVC = [[UINavigationController alloc] init];
+    BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
+    [navVC setViewControllers:@[loginVC] animated:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+        [navVC setViewControllers:@[imagesVC] animated:YES];
+    }];
+    self.window.rootViewController = navVC;
+    
+    //Above for Exercise 32 and Beyond
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

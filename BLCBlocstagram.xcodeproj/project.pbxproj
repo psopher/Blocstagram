@@ -28,6 +28,7 @@
 		5779BB661A871D0100B77796 /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB651A871D0100B77796 /* BLCComment.m */; };
 		5779BB691A871FAF00B77796 /* BLCDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB681A871FAF00B77796 /* BLCDatasource.m */; };
 		5779BB6C1A8AEE2800B77796 /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB6B1A8AEE2800B77796 /* BLCMediaTableViewCell.m */; };
+		57EABB6D1A9EB2A100FF2807 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		5779BB681A871FAF00B77796 /* BLCDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCDatasource.m; sourceTree = "<group>"; };
 		5779BB6A1A8AEE2800B77796 /* BLCMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaTableViewCell.h; sourceTree = "<group>"; };
 		5779BB6B1A8AEE2800B77796 /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaTableViewCell.m; sourceTree = "<group>"; };
+		57EABB6B1A9EB2A100FF2807 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
+		57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				5779BB111A864F4D00B77796 /* AppDelegate.m */,
 				5779BB5B1A86577200B77796 /* BLCImagesTableViewController.h */,
 				5779BB5C1A86577200B77796 /* BLCImagesTableViewController.m */,
+				57EABB6B1A9EB2A100FF2807 /* BLCLoginViewController.h */,
+				57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */,
 				5779BB6A1A8AEE2800B77796 /* BLCMediaTableViewCell.h */,
 				5779BB6B1A8AEE2800B77796 /* BLCMediaTableViewCell.m */,
 				5779BB5E1A871A3500B77796 /* BLCUser.h */,
@@ -296,6 +301,7 @@
 				5779BB631A871B8700B77796 /* BLCMedia.m in Sources */,
 				5779BB6C1A8AEE2800B77796 /* BLCMediaTableViewCell.m in Sources */,
 				5779BB661A871D0100B77796 /* BLCComment.m in Sources */,
+				57EABB6D1A9EB2A100FF2807 /* BLCLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

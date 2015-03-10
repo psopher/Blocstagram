@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class BLCUser;
 
@@ -16,5 +17,9 @@
 
 @property (nonatomic, strong) BLCUser *from;
 @property (nonatomic, strong) NSString *text;
+
+//Below for Exercise 33 and Beyond
+- (instancetype) initWithDictionary:(NSDictionary *)commentDictionary;
+//Above for Exercise 33 and Beyond
 
 @end
