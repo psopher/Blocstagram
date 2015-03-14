@@ -13,6 +13,7 @@
 @implementation BLCMedia
 
 ////Below for Exercise 33 and Beyond
+
 - (instancetype) initWithDictionary:(NSDictionary *)mediaDictionary {
     self = [super init];
     

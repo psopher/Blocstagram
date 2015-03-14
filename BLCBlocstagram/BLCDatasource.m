@@ -112,32 +112,32 @@
 //    self.mediaItems = randomMediaItems;
 //}
 //
-- (BLCUser *) randomUser {
-    BLCUser *user = [[BLCUser alloc] init];
-    
-    user.userName = [self randomStringOfLength:arc4random_uniform(10)];
-    
-    NSString *firstName = [self randomStringOfLength:arc4random_uniform(7)];
-    NSString *lastName = [self randomStringOfLength:arc4random_uniform(12)];
-    user.fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    
-    return user;
-}
-
-- (NSString *) randomSentenceWithMaximumNumberOfWords:(NSUInteger) len {
-        NSMutableString *randomSentence = [[NSMutableString alloc] init];
-    
-        NSUInteger wordCount = arc4random_uniform(len);
-    
-    
-        for (int i  = 0; i <= wordCount; i++) {
-                NSString *randomWord = [self randomStringOfLength:arc4random_uniform(12)];
-                [randomSentence appendFormat:@"%@ ", randomWord];
-            }
-    
-    
-        return [NSString stringWithString:randomSentence];
-    }
+//- (BLCUser *) randomUser {
+//    BLCUser *user = [[BLCUser alloc] init];
+//    
+//    user.userName = [self randomStringOfLength:arc4random_uniform(10)];
+//    
+//    NSString *firstName = [self randomStringOfLength:arc4random_uniform(7)];
+//    NSString *lastName = [self randomStringOfLength:arc4random_uniform(12)];
+//    user.fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+//    
+//    return user;
+//}
+//
+//- (NSString *) randomSentenceWithMaximumNumberOfWords:(NSUInteger) len {
+//        NSMutableString *randomSentence = [[NSMutableString alloc] init];
+//    
+//        NSUInteger wordCount = arc4random_uniform(len);
+//    
+//    
+//        for (int i  = 0; i <= wordCount; i++) {
+//                NSString *randomWord = [self randomStringOfLength:arc4random_uniform(12)];
+//                [randomSentence appendFormat:@"%@ ", randomWord];
+//            }
+//    
+//    
+//        return [NSString stringWithString:randomSentence];
+//    }
 //
 //- (BLCComment *) randomComment {
 //    BLCComment *comment = [[BLCComment alloc] init];
@@ -158,17 +158,17 @@
 //    return comment;
 //}
 //
-- (NSString *) randomStringOfLength:(NSUInteger) len {
-    NSString *alphabet = @"abcdefghijklmnopqrstuvwxyz";
-    
-    NSMutableString *s = [NSMutableString string];
-    for (NSUInteger i = 0U; i < len; i++) {
-        u_int32_t r = arc4random_uniform((u_int32_t)[alphabet length]);
-        unichar c = [alphabet characterAtIndex:r];
-        [s appendFormat:@"%C", c];
-    }
-    return [NSString stringWithString:s];
-}
+//- (NSString *) randomStringOfLength:(NSUInteger) len {
+//    NSString *alphabet = @"abcdefghijklmnopqrstuvwxyz";
+//    
+//    NSMutableString *s = [NSMutableString string];
+//    for (NSUInteger i = 0U; i < len; i++) {
+//        u_int32_t r = arc4random_uniform((u_int32_t)[alphabet length]);
+//        unichar c = [alphabet characterAtIndex:r];
+//        [s appendFormat:@"%C", c];
+//    }
+//    return [NSString stringWithString:s];
+//}
 //Above used through Exercise 31
 
 //Below for Exercise 30 and beyond
@@ -219,7 +219,7 @@
 //        BLCMedia *media = [[BLCMedia alloc] init];
 //        media.user = [self randomUser];
 //        media.image = [UIImage imageNamed:@"10.jpg"];
-////        media.caption = [self randomSentenceWithMaximumNumberOfWords:7];
+//        media.caption = [self randomSentenceWithMaximumNumberOfWords:7];
 //        
 //        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
 //        [mutableArrayWithKVO insertObject:media atIndex:0];
@@ -229,10 +229,13 @@
 //        self.isRefreshing = NO;
         //Above used through exercise 32
         
-        //Below is for Exercise 33 and Beyond
-        NSString *minID = [[self.mediaItems firstObject] idNumber];
+        //Below is for Exercise 33 and Beyond. This is the assignment for exercise 33.
+        NSString *minID = [[NSString alloc] init];
+        if (self.mediaItems.count > 0) {
+            NSString *minID = [[self.mediaItems firstObject] idNumber];
+        };
         NSDictionary *parameters = @{@"min_id": minID};
-        //Above is for Exercise 33 and Beyond
+        //Above is for Exercise 33 and Beyond. This is the assignment for exercise 33.
         
         //Below is used through Exercise 32
 //        if (completionHandler) {
@@ -270,14 +273,13 @@
         //Above used through exercise 32
         
         //Below is for Exercise 31 only
-        BLCMedia *media = [[BLCMedia alloc] init];
-        media.user = [self randomUser];
-
-        media.image = [UIImage imageNamed:@"1.jpg"];
-        media.caption = [self randomSentenceWithMaximumNumberOfWords:7];
-
-        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-        [mutableArrayWithKVO addObject:media];
+//        BLCMedia *media = [[BLCMedia alloc] init];
+//        media.user = [self randomUser];
+//        media.image = [UIImage imageNamed:@"%d.jpg"];
+//        media.caption = [self randomSentenceWithMaximumNumberOfWords:7];
+//
+//        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+//        [mutableArrayWithKVO addObject:media];
         //Above is for Exercise 31 only
         
         //Below used through exercise 32
@@ -421,7 +423,7 @@
         self.mediaItems = tmpMediaItems;
         [self didChangeValueForKey:@"mediaItems"];
     }
-////Above for Exercise 33 and Beyond
+//Above for Exercise 33 and Beyond
 }
 //Above for Exercise 32 and beyond
 

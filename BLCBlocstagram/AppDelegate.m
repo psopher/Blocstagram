@@ -12,7 +12,6 @@
 //Below for Exercise 32 and Beyond
 #import "BLCLoginViewController.h"
 #import "BLCDataSource.h"
-
 //Above for Exercise 32 and Beyond
 
 @interface AppDelegate ()
