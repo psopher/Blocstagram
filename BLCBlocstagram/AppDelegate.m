@@ -33,6 +33,13 @@
     //Below for Exercise 32 and Beyond
     [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
     UINavigationController *navVC = [[UINavigationController alloc] init];
+    //Above for Exercise 32 and Beyond
+    
+    //Below for Exercise 34 and Beyond
+    if (![BLCDatasource sharedInstance].accessToken) {
+    //Above for Exercise 34 and Beyond
+    
+    //Below for Exercise 32 and Beyond
     BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
     [navVC setViewControllers:@[loginVC] animated:YES];
     
@@ -40,8 +47,18 @@
         BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
         [navVC setViewControllers:@[imagesVC] animated:YES];
     }];
-    self.window.rootViewController = navVC;
+    //Above for Exercise 32 and Beyond
     
+    //Below for Exercise 34 and Beyond
+    } else {
+        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+        [navVC setViewControllers:@[imagesVC] animated:YES];
+    };
+    //Above for Exercise 34 and Beyond
+        
+        
+    //Below for Exercise 32 and Beyond
+    self.window.rootViewController = navVC;
     //Above for Exercise 32 and Beyond
     
     self.window.backgroundColor = [UIColor whiteColor];

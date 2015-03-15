@@ -15,6 +15,10 @@
 #import "BLCLoginViewController.h"
 //Above for Exercise 32 and Beyond
 
+//Below for Exercise 34 and Beyond
+#import <UICKeyChainStore.h>
+//Above for Exercise 34 and Beyond
+
 @interface BLCDatasource ()
 //Below for Exercise 30 and beyond
 {
@@ -58,9 +62,34 @@
 //        [self addRandomData];
         //Above used through Exercise 31
         
-        //Below for Exercise 32 and beyond
-        [self registerForAccessTokenNotification];
-        //Above for Exercise 32 and beyond
+        //Below for Exercise 32 and 33
+//        [self registerForAccessTokenNotification];
+        //Above for Exercise 32 and 33
+        
+        //Below for Exercise 34 and beyond
+        self.accessToken = [UICKeyChainStore stringForKey:@"access token"];
+        
+        if (!self.accessToken) {
+            [self registerForAccessTokenNotification];
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+                NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (storedMediaItems.count > 0) {
+                        NSMutableArray *mutableMediaItems = [storedMediaItems mutableCopy];
+                        
+                        [self willChangeValueForKey:@"mediaItems"];
+                        self.mediaItems = mutableMediaItems;
+                        [self didChangeValueForKey:@"mediaItems"];
+                    } else {
+                        [self populateDataWithParameters:nil completionHandler:nil];
+                    }
+                });
+            });
+        }
+        //Above for Exercise 34 and beyond
     }
     
     return self;
@@ -70,6 +99,10 @@
 - (void) registerForAccessTokenNotification {
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         self.accessToken = note.object;
+        
+        //Below is for Exercise 34 and beyond
+        [UICKeyChainStore setString:self.accessToken forKey:@"access token"];
+        //Above is for Exercise 34 and beyond
 
         //Below for Exercise 32 only
 //        [self populateDataWithParameters:nil];
@@ -424,6 +457,27 @@
         [self didChangeValueForKey:@"mediaItems"];
     }
 //Above for Exercise 33 and Beyond
+    
+    //Below for Exercise 34 and Beyond
+    if (tmpMediaItems.count > 0) {
+        // Write the changes to disk
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
+            NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+            NSData *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
+            
+            NSError *dataError;
+            BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+            
+            if (!wroteSuccessfully) {
+                NSLog(@"Couldn't write file: %@", dataError);
+            }
+        });
+        
+    }
+    //Above for Exercise 34 and Beyond
 }
 //Above for Exercise 32 and beyond
 
@@ -456,5 +510,14 @@
     }
 }
 //Above for Exercise 33 and Beyond
+
+//Below for Exercise 34 and Beyond
+- (NSString *) pathForFilename:(NSString *) filename {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
+    return dataPath;
+}
+//Above for Exercise 34 and Beyond
 
 @end

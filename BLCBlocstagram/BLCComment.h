@@ -11,7 +11,13 @@
 
 @class BLCUser;
 
-@interface BLCComment : NSObject
+//Below used Through Exercise 33
+//@interface BLCComment : NSObject
+//Above used Through Exercise 33
+
+//Below for Exercise 34 and Beyond
+@interface BLCComment : NSObject <NSCoding>
+//Above for Exercise 34 and Beyond
 
 @property (nonatomic, strong) NSString *idNumber;
 

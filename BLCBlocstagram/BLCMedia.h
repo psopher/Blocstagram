@@ -11,7 +11,13 @@
 
 @class BLCUser;
 
-@interface BLCMedia : NSObject
+//Below for Exercise 33 and Beyond
+//@interface BLCMedia : NSObject
+//Above for Exercise 33 and Beyond
+
+//Below for Exercise 34 and Beyond
+@interface BLCMedia : NSObject <NSCoding>
+//Above for Exercise 34 and Beyond
 
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) BLCUser *user;
