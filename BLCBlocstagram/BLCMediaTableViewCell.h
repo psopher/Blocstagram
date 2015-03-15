@@ -10,11 +10,28 @@
 
 //For exercise 28 and beyond
 
-@class BLCMedia;
+//Below used Through Exercise 34
+//@class BLCMedia;
+//Above used Through Exercise 34
+
+//Below for Exercise 35 and Beyond
+@class BLCMedia, BLCMediaTableViewCell;
+
+@protocol BLCMediaTableViewCellDelegate <NSObject>
+
+- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
+- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
+
+@end
+//Above for Exercise 35 and Beyond
 
 @interface BLCMediaTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) BLCMedia *mediaItem;
+
+//Below for Exercise 35 and Beyond
+@property (nonatomic, weak) id <BLCMediaTableViewCellDelegate> delegate;
+//Above for Exercise 35 and Beyond
 
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width;
 

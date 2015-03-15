@@ -19,8 +19,20 @@
 #import "BLCMediaTableViewCell.h"
 //Above for exercise 28 and beyond
 
-@interface BLCImagesTableViewController ()
+//Below for Exercise 35 and Beyond
+#import "BLCMediaFullScreenViewController.h"
+#import "BLCMediaFullScreenAnimator.h"
+//Above for Exercise 35 and Beyond
 
+//Below used Through Exercise 34
+//@interface BLCImagesTableViewController ()
+//Above used Through Exercise 34
+
+//Below for Exercise 35 and Beyond
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
+
+@property (nonatomic, weak) UIImageView *lastTappedImageView;
+//Above for Exercise 35 and Beyond
 
 @end
 
@@ -225,6 +237,13 @@
     
     //Below for exercise 28 and beyond
     BLCMediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    //Above for exercise 28 and beyond
+    
+    //Below for Exercise 35 and Beyond
+    cell.delegate = self;
+    //Above for Exercise 35 and Beyond
+    
+    //Below for exercise 28 and beyond
     cell.mediaItem = [self items][indexPath.row];
     cell.mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
     //Above for exercise 28 and beyond
@@ -252,6 +271,56 @@
     return [BLCMediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
     //Above for exercise 28 and beyond
 }
+
+//Below for Exercise 35 and Beyond
+#pragma mark - BLCMediaTableViewCellDelegate
+
+- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
+    self.lastTappedImageView = imageView;
+    
+    BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
+    
+    fullScreenVC.transitioningDelegate = self;
+    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [self presentViewController:fullScreenVC animated:YES completion:nil];
+}
+
+- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView {
+    NSMutableArray *itemsToShare = [NSMutableArray array];
+    
+    if (cell.mediaItem.caption.length > 0) {
+        [itemsToShare addObject:cell.mediaItem.caption];
+    }
+    
+    if (cell.mediaItem.image) {
+        [itemsToShare addObject:cell.mediaItem.image];
+    }
+    
+    if (itemsToShare.count > 0) {
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.presenting = YES;
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
+//Above for Exercise 35 and Beyond
 
 //Below is assignment for Exercise 26. It stays in the code through Exercise 29
 //// Override to support conditional editing of the table view.

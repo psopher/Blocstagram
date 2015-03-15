@@ -13,7 +13,13 @@
 
 //For exercise 28 and beyond
 
-@interface BLCMediaTableViewCell () 
+//Below used Through Exercise 34
+//@interface BLCMediaTableViewCell () 
+//Above used Through Exercise 34
+
+//Below for Exercise 35 and Beyond
+@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
+//Above for Exercise 35 and Beyond
 
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
@@ -24,6 +30,11 @@
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
 //Above for exercise 29 and beyond
+
+//Below for Exercise 35 and Beyond
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+//Above for Exercise 35 and Beyond
 
 @end
 
@@ -41,6 +52,19 @@ static NSParagraphStyle *paragraphStyle;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.mediaImageView = [[UIImageView alloc] init];
+        
+        //Below for Exercise 35 and Beyond
+        self.mediaImageView.userInteractionEnabled = YES;
+        
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
+        self.tapGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
+        
+        self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
+        self.longPressGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
+        //Above for Exercise 35 and Beyond
+        
         self.usernameAndCaptionLabel = [[UILabel alloc] init];
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.numberOfLines = 0;
@@ -177,6 +201,14 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
     //Above is for Exercise 29 and beyond
     
+    //Below for Exercise 35 and Beyond
+    if (_mediaItem.image) {
+        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+    } else {
+        self.imageHeightConstraint.constant = 0;
+    }
+    //Above for Exercise 35 and Beyond
+    
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
 }
 
@@ -190,13 +222,13 @@ static NSParagraphStyle *paragraphStyle;
 //    self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     //Above is for Exercise 29 through exercise 32
     
-    //Below for Exercise 33 and beyond
-    if (_mediaItem.image) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
-    //Above for Exercise 33 and beyond
+    //Below for Exercises 33 and 34
+//    if (_mediaItem.image) {
+//        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+//    } else {
+//        self.imageHeightConstraint.constant = 0;
+//    }
+    //Above for Exercises 33 and 34
 }
 
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width {
@@ -243,5 +275,25 @@ static NSParagraphStyle *paragraphStyle;
 
     // Configure the view for the selected state
 }
+
+//Below for Exercise 35 and Beyond
+#pragma mark - Image View
+
+- (void) tapFired:(UITapGestureRecognizer *)sender {
+    [self.delegate cell:self didTapImageView:self.mediaImageView];
+}
+
+- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return self.isEditing == NO;
+}
+//Above for Exercise 35 and Beyond
 
 @end
