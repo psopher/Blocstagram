@@ -19,14 +19,22 @@
 #import "BLCLikeButton.h"
 //Above for Exercise 38 and Beyond
 
+//Below for Exercise 39 and Beyond
+#import "BLCComposeCommentView.h"
+//Above for Exercise 39 and Beyond
+
 
 //Below used Through Exercise 34
 //@interface BLCMediaTableViewCell () 
 //Above used Through Exercise 34
 
-//Below for Exercise 35 and Beyond
-@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
-//Above for Exercise 35 and Beyond
+//Below for Exercise 35 Through Exercise 38
+//@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
+//Above for Exercise Through Exercise 38
+
+//Below for Exercise 39 and Beyond
+@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate, BLCComposeCommentViewDelegate>
+//Above for Exercise 39 and Beyond
 
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
@@ -46,6 +54,10 @@
 //Below for Exercise 38 and Beyond
 @property (nonatomic, strong) BLCLikeButton *likeButton;
 //Above for Exercise 38 and Beyond
+
+//Below for Exercise 39 and Beyond
+@property (nonatomic, strong) BLCComposeCommentView *commentView;
+//Above for Exercise 39 and Beyond
 
 @end
 
@@ -84,9 +96,20 @@ static NSParagraphStyle *paragraphStyle;
         self.likeButton = [[BLCLikeButton alloc] init];
         [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
         self.likeButton.backgroundColor = usernameLabelGray;
-        
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton]) {
         //Above for Exercise 38 and Beyond
+        
+        //Below for Exercise 39 and Beyond
+        self.commentView = [[BLCComposeCommentView alloc] init];
+        self.commentView.delegate = self;
+        //Above for Exercise 39 and Beyond
+        
+        //Below for Exercise 38 only
+//        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton]) {
+        //Above for Exercise 38 only
+        
+        //Below for Exercise 39 and Beyond
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton, self.commentView]) {
+        //Above for Exercise 39 and Beyond
         
         //Below used Through Exercise 37
 //        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
@@ -99,9 +122,13 @@ static NSParagraphStyle *paragraphStyle;
             //Abover for exercise 29 and beyond
         }
         
-        //Below for Exercise 38 and Beyond
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton);
-        //Above for Exercise 38 and Beyond
+        //Below for Exercise 38 only
+//        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton);
+        //Above for Exercise 38 only
+        
+        //Below for Exercise 39 and Beyond
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
+        //Above for Exercise 39 and Beyond
         
         //Below for exercise 29 Through Exercise 37
 //        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
@@ -121,8 +148,21 @@ static NSParagraphStyle *paragraphStyle;
         
         //Below for Exercise 29 and Beyond
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        //Above for Exercise 29 and Beyond
         
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
+        //Below for Exercise 39 and Beyond
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        //Above for Exercise 39 and Beyond
+        
+        //Below for Exercise 29 Through Exercise 38
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
+        //Above for Exercise 29 Through Exercise 38
+                                          
+        //Below for Exercise 39 and Beyond
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
+        //Above for Exercise 39 and Beyond
+        
+        //Below for Exercise 29 and Beyond
                                                                                  options:kNilOptions
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
@@ -260,6 +300,10 @@ static NSParagraphStyle *paragraphStyle;
     self.likeButton.likeButtonState = mediaItem.likeState;
     //Above for Exercise 38 and Beyond
     
+    //Below for Exercise 39 and Beyond
+    self.commentView.text = mediaItem.temporaryComment;
+    //Above for Exercise 39 and Beyond
+    
     //Below is for Exercise 29 through exercise 32
 //    self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     //Above is for Exercise 29 through exercise 32
@@ -293,7 +337,13 @@ static NSParagraphStyle *paragraphStyle;
     [layoutCell layoutIfNeeded];
     //Above is for Exercise 29 and beyond
     
-    return CGRectGetMaxY(layoutCell.commentLabel.frame);
+    //Below used Through Exercise 38
+//    return CGRectGetMaxY(layoutCell.commentLabel.frame);
+    //Above used Through Exercise 38
+    
+    //Below for Exercise 39 and Beyond
+    return CGRectGetMaxY(layoutCell.commentView.frame);
+    //Above for Exercise 39 and Beyond
 }
 
 - (void)awakeFromNib {
@@ -325,6 +375,26 @@ static NSParagraphStyle *paragraphStyle;
     [self.delegate cellDidPressLikeButton:self];
 }
 //Above for Exercise 38 and Beyond
+                                          
+//Below for Exercise 39 and Beyond
+#pragma mark - BLCComposeCommentViewDelegate
+                                          
+- (void) commentViewDidPressCommentButton:(BLCComposeCommentView *)sender {
+    [self.delegate cell:self didComposeComment:self.mediaItem.temporaryComment];
+}
+                                          
+- (void) commentView:(BLCComposeCommentView *)sender textDidChange:(NSString *)text {
+    self.mediaItem.temporaryComment = text;
+}
+                                          
+- (void) commentViewWillStartEditing:(BLCComposeCommentView *)sender {
+    [self.delegate cellWillStartComposingComment:self];
+}
+                                          
+- (void) stopComposingComment {
+    [self.commentView stopComposingComment];
+}
+//Above for Exercise 39 and Beyond
 
 //Below for Exercise 35 and Beyond
 #pragma mark - Image View

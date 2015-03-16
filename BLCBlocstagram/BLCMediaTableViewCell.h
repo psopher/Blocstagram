@@ -14,8 +14,13 @@
 //@class BLCMedia;
 //Above used Through Exercise 34
 
-//Below for Exercise 35 and Beyond
-@class BLCMedia, BLCMediaTableViewCell;
+//Below for Exercise 35 Through Exercise 38
+//@class BLCMedia, BLCMediaTableViewCell;
+//Above for Exercise 35 Through Exercise 38
+
+//Below for Exercise 39 and Beyond
+@class BLCMedia, BLCMediaTableViewCell, BLCComposeCommentView;
+//Above for Exercise 39 and Beyond
 
 @protocol BLCMediaTableViewCellDelegate <NSObject>
 
@@ -25,6 +30,11 @@
 //Below for Exercise 38 and Beyond
 - (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell;
 //Above for Exercise 38 and Beyond
+
+//Below for Exercise 39 and Beyond
+- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell;
+- (void) cell:(BLCMediaTableViewCell *)cell didComposeComment:(NSString *)comment;
+//Above for Exercise 39 and Beyond
 
 @end
 //Above for Exercise 35 and Beyond
@@ -37,6 +47,14 @@
 @property (nonatomic, weak) id <BLCMediaTableViewCellDelegate> delegate;
 //Above for Exercise 35 and Beyond
 
+//Below for Exercise 39 and Beyond
+@property (nonatomic, strong, readonly) BLCComposeCommentView *commentView;
+//Above for Exercise 39 and Beyond
+
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width;
+
+//Below for Exercise 39 and Beyond
+- (void) stopComposingComment;
+//Above for Exercise 39 and Beyond
 
 @end
