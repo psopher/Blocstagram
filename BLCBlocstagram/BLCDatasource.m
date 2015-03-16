@@ -474,7 +474,7 @@
         
         if (mediaItem) {
             [tmpMediaItems addObject:mediaItem];
-            [self downloadImageForMediaItem:mediaItem];
+//            [self downloadImageForMediaItem:mediaItem];
         }
     }
     
@@ -556,18 +556,53 @@
 //        });
         //Above Used Through Exercise 35
         
+        //Below for Exercise 37 and Beyond
+        mediaItem.downloadState = BLCMediaDownloadStateDownloadInProgress;
+        //Above for Exercise 37 and Beyond
+        
         //Below for Exercise 36 and Beyond
         [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString
                                  parameters:nil
                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                         if ([responseObject isKindOfClass:[UIImage class]]) {
                                             mediaItem.image = responseObject;
+                                            
+                                            //Below for Exercise 37 and Beyond
+                                            mediaItem.downloadState = BLCMediaDownloadStateHasImage;
+                                            //Above for Exercise 37 and Beyond
+                                            
                                             NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
                                             NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
                                             [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+                                            
+                                            //Below for Exercise 37 and Beyond
+                                        } else {
+                                            mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
+                                            //Above for Exercise 37 and Beyond
                                         }
                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                         NSLog(@"Error downloading image: %@", error);
+                                        
+                                        //Below for Exercise 37 and Beyond
+                                        mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
+                                        
+                                        if ([error.domain isEqualToString:NSURLErrorDomain]) {
+                                            // A networking problem
+                                            if (error.code == NSURLErrorTimedOut ||
+                                                error.code == NSURLErrorCancelled ||
+                                                error.code == NSURLErrorCannotConnectToHost ||
+                                                error.code == NSURLErrorNetworkConnectionLost ||
+                                                error.code == NSURLErrorNotConnectedToInternet ||
+                                                error.code == kCFURLErrorInternationalRoamingOff ||
+                                                error.code == kCFURLErrorCallIsActive ||
+                                                error.code == kCFURLErrorDataNotAllowed ||
+                                                error.code == kCFURLErrorRequestBodyStreamExhausted) {
+                                                
+                                                // It might work if we try again
+                                                mediaItem.downloadState = BLCMediaDownloadStateNeedsImage;
+                                            }
+                                        }
+                                        //Above for Exercise 37 and Beyond
                                     }];
         //Above for Exercise 36 and Beyond
     }
@@ -582,5 +617,48 @@
     return dataPath;
 }
 //Above for Exercise 34 and Beyond
+
+//Below for Exercise 38 and Beyond
+#pragma mark - Liking Media Items
+
+- (void) toggleLikeOnMediaItem:(BLCMedia *)mediaItem {
+    NSString *urlString = [NSString stringWithFormat:@"media/%@/likes", mediaItem.idNumber];
+    NSDictionary *parameters = @{@"access_token": self.accessToken};
+    
+    if (mediaItem.likeState == BLCLikeStateNotLiked) {
+        
+        mediaItem.likeState = BLCLikeStateLiking;
+        
+        [self.instagramOperationManager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            mediaItem.likeState = BLCLikeStateLiked;
+            [self reloadMediaItem:mediaItem];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            mediaItem.likeState = BLCLikeStateNotLiked;
+            [self reloadMediaItem:mediaItem];
+        }];
+        
+    } else if (mediaItem.likeState == BLCLikeStateLiked) {
+        
+        mediaItem.likeState = BLCLikeStateUnliking;
+        
+        [self.instagramOperationManager DELETE:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            mediaItem.likeState = BLCLikeStateNotLiked;
+            [self reloadMediaItem:mediaItem];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            mediaItem.likeState = BLCLikeStateLiked;
+            [self reloadMediaItem:mediaItem];
+        }];
+        
+    }
+    
+    [self reloadMediaItem:mediaItem];
+}
+
+- (void) reloadMediaItem:(BLCMedia *)mediaItem {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+    NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
+    [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+}
+//Above for Exercise 38 and Beyond
 
 @end

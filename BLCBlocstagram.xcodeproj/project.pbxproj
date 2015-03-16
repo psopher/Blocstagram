@@ -28,6 +28,8 @@
 		5779BB661A871D0100B77796 /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB651A871D0100B77796 /* BLCComment.m */; };
 		5779BB691A871FAF00B77796 /* BLCDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB681A871FAF00B77796 /* BLCDatasource.m */; };
 		5779BB6C1A8AEE2800B77796 /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5779BB6B1A8AEE2800B77796 /* BLCMediaTableViewCell.m */; };
+		57934DAC1AB6437D002114C3 /* BLCCircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57934DAB1AB6437D002114C3 /* BLCCircleSpinnerView.m */; };
+		57934DAF1AB64AD4002114C3 /* BLCLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57934DAE1AB64AD4002114C3 /* BLCLikeButton.m */; };
 		57EABB6D1A9EB2A100FF2807 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */; };
 		57EF375F1AB5F17C00957533 /* BLCMediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EF375E1AB5F17C00957533 /* BLCMediaFullScreenViewController.m */; };
 		57EF37621AB5FA2400957533 /* BLCMediaFullScreenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EF37611AB5FA2400957533 /* BLCMediaFullScreenAnimator.m */; };
@@ -79,6 +81,10 @@
 		5779BB681A871FAF00B77796 /* BLCDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCDatasource.m; sourceTree = "<group>"; };
 		5779BB6A1A8AEE2800B77796 /* BLCMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaTableViewCell.h; sourceTree = "<group>"; };
 		5779BB6B1A8AEE2800B77796 /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaTableViewCell.m; sourceTree = "<group>"; };
+		57934DAA1AB6437D002114C3 /* BLCCircleSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCCircleSpinnerView.h; sourceTree = "<group>"; };
+		57934DAB1AB6437D002114C3 /* BLCCircleSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCircleSpinnerView.m; sourceTree = "<group>"; };
+		57934DAD1AB64AD4002114C3 /* BLCLikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLikeButton.h; sourceTree = "<group>"; };
+		57934DAE1AB64AD4002114C3 /* BLCLikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLikeButton.m; sourceTree = "<group>"; };
 		57EABB6B1A9EB2A100FF2807 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
 		57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
 		57EF375D1AB5F17C00957533 /* BLCMediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaFullScreenViewController.h; sourceTree = "<group>"; };
@@ -133,6 +139,10 @@
 				5779BB321A86533400B77796 /* Images */,
 				5779BB101A864F4D00B77796 /* AppDelegate.h */,
 				5779BB111A864F4D00B77796 /* AppDelegate.m */,
+				57934DAA1AB6437D002114C3 /* BLCCircleSpinnerView.h */,
+				57934DAB1AB6437D002114C3 /* BLCCircleSpinnerView.m */,
+				57934DAD1AB64AD4002114C3 /* BLCLikeButton.h */,
+				57934DAE1AB64AD4002114C3 /* BLCLikeButton.m */,
 				5779BB5B1A86577200B77796 /* BLCImagesTableViewController.h */,
 				5779BB5C1A86577200B77796 /* BLCImagesTableViewController.m */,
 				57EF37601AB5FA2400957533 /* BLCMediaFullScreenAnimator.h */,
@@ -364,10 +374,12 @@
 			files = (
 				5779BB601A871A3500B77796 /* BLCUser.m in Sources */,
 				57EF37621AB5FA2400957533 /* BLCMediaFullScreenAnimator.m in Sources */,
+				57934DAF1AB64AD4002114C3 /* BLCLikeButton.m in Sources */,
 				5779BB121A864F4D00B77796 /* AppDelegate.m in Sources */,
 				5779BB0F1A864F4D00B77796 /* main.m in Sources */,
 				5779BB5D1A86577200B77796 /* BLCImagesTableViewController.m in Sources */,
 				5779BB691A871FAF00B77796 /* BLCDatasource.m in Sources */,
+				57934DAC1AB6437D002114C3 /* BLCCircleSpinnerView.m in Sources */,
 				5779BB631A871B8700B77796 /* BLCMedia.m in Sources */,
 				57EF375F1AB5F17C00957533 /* BLCMediaFullScreenViewController.m in Sources */,
 				5779BB6C1A8AEE2800B77796 /* BLCMediaTableViewCell.m in Sources */,

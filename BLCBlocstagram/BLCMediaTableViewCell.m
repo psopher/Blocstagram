@@ -6,12 +6,19 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
+
+//For exercise 28 and beyond
+
+
 #import "BLCMediaTableViewCell.h"
 #import "BLCMedia.h"
 #import "BLCComment.h"
 #import "BLCUser.h"
 
-//For exercise 28 and beyond
+//Below for Exercise 38 and Beyond
+#import "BLCLikeButton.h"
+//Above for Exercise 38 and Beyond
+
 
 //Below used Through Exercise 34
 //@interface BLCMediaTableViewCell () 
@@ -35,6 +42,10 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 //Above for Exercise 35 and Beyond
+
+//Below for Exercise 38 and Beyond
+@property (nonatomic, strong) BLCLikeButton *likeButton;
+//Above for Exercise 38 and Beyond
 
 @end
 
@@ -69,7 +80,18 @@ static NSParagraphStyle *paragraphStyle;
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.numberOfLines = 0;
         
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
+        //Below for Exercise 38 and Beyond
+        self.likeButton = [[BLCLikeButton alloc] init];
+        [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.likeButton.backgroundColor = usernameLabelGray;
+        
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton]) {
+        //Above for Exercise 38 and Beyond
+        
+        //Below used Through Exercise 37
+//        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
+        //Above used Throu Exercise 37
+            
             [self.contentView addSubview:view];
             
             //Below for exercise 29 and beyond
@@ -77,11 +99,27 @@ static NSParagraphStyle *paragraphStyle;
             //Abover for exercise 29 and beyond
         }
         
-        //Below for exercise 29 and beyond
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
+        //Below for Exercise 38 and Beyond
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton);
+        //Above for Exercise 38 and Beyond
         
+        //Below for exercise 29 Through Exercise 37
+//        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
+        //Above for exercise 29 Through Exercise 37
+        
+        //Below for Exercise 29 and Beyond
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        //Above for Exercise 29 and Beyond
+        
+        //Below for Exercise 29 Through 37
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        //Above for Exercise 29 Through 37
+        
+        //Below for Exercise 38 and Beyond
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
+        //Above for Exercise 38 and Beyond
+        
+        //Below for Exercise 29 and Beyond
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
@@ -218,6 +256,10 @@ static NSParagraphStyle *paragraphStyle;
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
     
+    //Below for Exercise 38 and Beyond
+    self.likeButton.likeButtonState = mediaItem.likeState;
+    //Above for Exercise 38 and Beyond
+    
     //Below is for Exercise 29 through exercise 32
 //    self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     //Above is for Exercise 29 through exercise 32
@@ -275,6 +317,14 @@ static NSParagraphStyle *paragraphStyle;
 
     // Configure the view for the selected state
 }
+
+//Below for Exercise 38 and Beyond
+#pragma mark - Liking
+
+- (void) likePressed:(UIButton *)sender {
+    [self.delegate cellDidPressLikeButton:self];
+}
+//Above for Exercise 38 and Beyond
 
 //Below for Exercise 35 and Beyond
 #pragma mark - Image View

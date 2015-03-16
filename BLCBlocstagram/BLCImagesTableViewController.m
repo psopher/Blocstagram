@@ -251,6 +251,13 @@
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
+    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //Below for exercise 26 only
 //    UIImage *image = self.images[indexPath.row];
@@ -302,6 +309,12 @@
         [self presentViewController:activityVC animated:YES completion:nil];
     }
 }
+
+//Below for Exercise 38 and Beyond
+- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
+    [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
+}
+//Above for Exercise 38 and Beyond
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
