@@ -24,13 +24,23 @@
 #import "BLCMediaFullScreenAnimator.h"
 //Above for Exercise 35 and Beyond
 
+//Below for Exercise 40 and Beyond
+#import "BLCCameraViewController.h"
+//Above for Exercise 40 and Beyond
+
 //Below used Through Exercise 34
 //@interface BLCImagesTableViewController ()
 //Above used Through Exercise 34
 
-//Below for Exercise 35 and Beyond
-@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
+//Below for Exercise 35 and 39
+//@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
+//Above for Exercise 35 and 39
 
+//Below for Exercise 40 and Beyond
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
+//Above for Exercise 40 and Beyond
+
+//Below for Exercise 35 and Beyond
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
 //Above for Exercise 35 and Beyond
 
@@ -88,7 +98,17 @@
     
     //Below for Exercise 39 and Beyond
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    //Above for Exercise 39 and Beyond
     
+    //Below for Exercise 40 and Beyond
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ||
+        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraPressed:)];
+        self.navigationItem.rightBarButtonItem = cameraButton;
+    }
+    //Above for Exercise 40 and Beyond
+    
+    //Below for Exercise 39 and Beyond
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -474,6 +494,28 @@
     } completion:nil];
 }
 //Above for Exercise 39 and Beyond
+
+//Below for Exercise 40 and Beyond
+#pragma mark - Camera and BLCCameraViewControllerDelegate
+
+- (void) cameraPressed:(UIBarButtonItem *) sender {
+    BLCCameraViewController *cameraVC = [[BLCCameraViewController alloc] init];
+    cameraVC.delegate = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
+    [self presentViewController:nav animated:YES completion:nil];
+    return;
+}
+
+- (void) cameraViewController:(BLCCameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image {
+    [cameraViewController dismissViewControllerAnimated:YES completion:^{
+        if (image) {
+            NSLog(@"Got an image!");
+        } else {
+            NSLog(@"Closed without an image.");
+        }
+    }];
+}
+//Above for Exercise 40 and Beyond
 
 //Below is assignment for Exercise 26. It stays in the code through Exercise 29
 //// Override to support conditional editing of the table view.
