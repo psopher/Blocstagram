@@ -19,6 +19,10 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 
 @interface BLCDatasource : NSObject
 
+//Below for Exercise 43 and Beyond
+extern NSString *const BLCImageFinishedNotification;
+//Above for Exercise 43 and Beyond
+
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 

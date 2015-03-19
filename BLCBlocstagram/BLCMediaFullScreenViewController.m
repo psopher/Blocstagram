@@ -11,6 +11,10 @@
 #import "BLCMediaFullScreenViewController.h"
 #import "BLCMedia.h"
 
+//Below for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//Above for Exercise 43 and Beyond
+
 @interface BLCMediaFullScreenViewController () <UIScrollViewDelegate>
 
 //Below used Through Exercise 40
@@ -19,6 +23,10 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
+
+//Below for Exercise 43 and Beyond
+@property (nonatomic, strong) UITapGestureRecognizer *tapBehind;
+//Above for Exercise 43 and Beyond
 
 @end
 
@@ -55,6 +63,13 @@
     self.doubleTap.numberOfTapsRequired = 2;
     
     [self.tap requireGestureRecognizerToFail:self.doubleTap];
+    
+    //Below for Exercise 43 and Beyond
+    if (isPhone == NO) {
+        self.tapBehind = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBehindFired:)];
+        self.tapBehind.cancelsTouchesInView = NO;
+    }
+    //Above for Exercise 43 and Beyond
     
     [self.scrollView addGestureRecognizer:self.tap];
     [self.scrollView addGestureRecognizer:self.doubleTap];
@@ -122,12 +137,43 @@
     [super viewWillAppear:animated];
     
     [self centerScrollView];
+    
+    //Below for Exercise 43 and Beyond
+    if (isPhone == NO) {
+        [[[[UIApplication sharedApplication] delegate] window] addGestureRecognizer:self.tapBehind];
+    }
+    //Above for Exercise 43 and Beyond
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//Below for Exercise 43 and Beyond
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (isPhone == NO) {
+        [[[[UIApplication sharedApplication] delegate] window] removeGestureRecognizer:self.tapBehind];
+    }
+}
+
+- (void) tapBehindFired:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [sender locationInView:nil]; // Passing nil gives us coordinates in the window
+        CGPoint locationInVC = [self.presentedViewController.view convertPoint:location fromView:self.view.window];
+        
+        if ([self.presentedViewController.view pointInside:locationInVC withEvent:nil] == NO) {
+            // The tap was outside the VC's view
+            
+            if (self.presentingViewController) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+    }
+}
+//Above for Exercise 43 and Beyond
 
 #pragma mark - Gesture Recognizers
 

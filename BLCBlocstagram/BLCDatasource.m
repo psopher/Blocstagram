@@ -23,6 +23,10 @@
 #import <UICKeyChainStore.h>
 //Above for Exercise 34 and Beyond
 
+//Below for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//Above for Exercise 43 and Beyond
+
 @interface BLCDatasource ()
 //Below for Exercise 30 and beyond
 {
@@ -52,6 +56,10 @@
 @end
 
 @implementation BLCDatasource
+
+//Below for Exercise 43 and Beyond
+NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
+//Above for Exercise 43 and Beyond
 
 + (instancetype) sharedInstance {
     static dispatch_once_t once;
