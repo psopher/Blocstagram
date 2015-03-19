@@ -28,6 +28,10 @@
 #import "BLCCameraViewController.h"
 //Above for Exercise 40 and Beyond
 
+//Below for Exercise 41 and Beyond
+#import "BLCImageLibraryViewController.h"
+//Above for Exercise 41 and Beyond
+
 //Below used Through Exercise 34
 //@interface BLCImagesTableViewController ()
 //Above used Through Exercise 34
@@ -36,9 +40,13 @@
 //@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 //Above for Exercise 35 and 39
 
-//Below for Exercise 40 and Beyond
-@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
-//Above for Exercise 40 and Beyond
+//Below for Exercise 40 only
+//@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
+//Above for Exercise 40 only
+
+//Below for Exercise 41 and Beyond
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate, BLCImageLibraryViewControllerDelegate>
+//Above for Exercise 41 and Beyond
 
 //Below for Exercise 35 and Beyond
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
@@ -496,13 +504,41 @@
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 40 and Beyond
-#pragma mark - Camera and BLCCameraViewControllerDelegate
+#pragma mark - Camera, BLCCameraViewControllerDelegate, and BLCImageLibraryViewControllerDelegate
 
 - (void) cameraPressed:(UIBarButtonItem *) sender {
+    
+    //Below for Exercise 41 and Beyond
+    UIViewController *imageVC;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    //Above for Exercise 41 and Beyond
+    
     BLCCameraViewController *cameraVC = [[BLCCameraViewController alloc] init];
     cameraVC.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
+    
+    //Below for Exercise 40 only
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
+    //Above for Exercise 40 only
+        
+    //Below for Exercise 41 and Beyond
+        imageVC = cameraVC;
+    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        BLCImageLibraryViewController *imageLibraryVC = [[BLCImageLibraryViewController alloc] init];
+        imageLibraryVC.delegate = self;
+        imageVC = imageLibraryVC;
+    }
+    
+    if (imageVC) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
+    //Above for Exercise 41 and Beyond
+        
     [self presentViewController:nav animated:YES completion:nil];
+        
+    //Below for Exercise 41 and Beyond
+    }
+    //Above for Exercise 41 and Beyond
+    
     return;
 }
 
@@ -516,6 +552,18 @@
     }];
 }
 //Above for Exercise 40 and Beyond
+
+//Below for Exercise 41 and Beyond
+- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
+    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
+        if (image) {
+            NSLog(@"Got an image!");
+        } else {
+            NSLog(@"Closed without an image.");
+        }
+    }];
+}
+//Above for Exercise 41 and Beyond
 
 //Below is assignment for Exercise 26. It stays in the code through Exercise 29
 //// Override to support conditional editing of the table view.

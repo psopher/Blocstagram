@@ -13,7 +13,9 @@
 
 @interface BLCMediaFullScreenViewController () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) BLCMedia *media;
+//Below used Through Exercise 40
+//@property (nonatomic, strong) BLCMedia *media;
+//Above used Through Exercise 40
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
@@ -62,8 +64,20 @@
     [super viewWillLayoutSubviews];
     self.scrollView.frame = self.view.bounds;
     
+//Below for Exercise 41 and Beyond
+    [self recalculateZoomScale];
+}
+
+- (void) recalculateZoomScale {
+//Above for Exercise 41 and Beyond
+    
     CGSize scrollViewFrameSize = self.scrollView.frame.size;
     CGSize scrollViewContentSize = self.scrollView.contentSize;
+    
+    //Below for Exercise 41 and Beyond
+    scrollViewContentSize.height /= self.scrollView.zoomScale;
+    scrollViewContentSize.width /= self.scrollView.zoomScale;
+    //Above for Exercise 41 and Beyond
     
     CGFloat scaleWidth = scrollViewFrameSize.width / scrollViewContentSize.width;
     CGFloat scaleHeight = scrollViewFrameSize.height / scrollViewContentSize.height;

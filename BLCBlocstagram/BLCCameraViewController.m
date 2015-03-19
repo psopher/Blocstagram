@@ -13,7 +13,19 @@
 #import "BLCCameraToolbar.h"
 #import "BLCImageUtilities.h"
 
-@interface BLCCameraViewController () <BLCCameraToolbarDelegate, UIAlertViewDelegate>
+//Below for Exercise 41 and Beyond
+#import "BLCCropBox.h"
+#import "BLCImageLibraryViewController.h"
+//Above for Exercise 41 and Beyond
+
+//Below for Exercise 40 only
+//@interface BLCCameraViewController () <BLCCameraToolbarDelegate, UIAlertViewDelegate>
+//Above for Exercise 40 only
+
+//Below for Exercise 41 and Beyond
+@interface BLCCameraViewController () <BLCCameraToolbarDelegate, UIAlertViewDelegate, BLCImageLibraryViewControllerDelegate>
+//Above for Exercise 41 and Beyond
+
 
 @property (nonatomic, strong) UIView *imagePreview;
 
@@ -21,8 +33,15 @@
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 
-@property (nonatomic, strong) NSArray *horizontalLines;
-@property (nonatomic, strong) NSArray *verticalLines;
+//Below for Exercise 40 only
+//@property (nonatomic, strong) NSArray *horizontalLines;
+//@property (nonatomic, strong) NSArray *verticalLines;
+//Above for Exercise 40 only
+
+//Below for Exercise 41 and Beyond
+@property (nonatomic, strong) BLCCropBox *cropBox;
+//Above for Exercise 41 and Beyond
+
 @property (nonatomic, strong) UIToolbar *topView;
 @property (nonatomic, strong) UIToolbar *bottomView;
 
@@ -92,9 +111,17 @@
 }
 
 - (void) addViewsToViewHierarchy {
-    NSMutableArray *views = [@[self.imagePreview, self.topView, self.bottomView] mutableCopy];
-    [views addObjectsFromArray:self.horizontalLines];
-    [views addObjectsFromArray:self.verticalLines];
+    
+    //Below for Exercise 40 only
+//    NSMutableArray *views = [@[self.imagePreview, self.topView, self.bottomView] mutableCopy];
+//    [views addObjectsFromArray:self.horizontalLines];
+//    [views addObjectsFromArray:self.verticalLines];
+    //Above for Exercise 40 only
+    
+    //Below for Exercise 41 and Beyond
+    NSMutableArray *views = [@[self.imagePreview, self.cropBox, self.topView, self.bottomView] mutableCopy];
+    //Above for Exercise 41 and Beyond
+    
     [views addObject:self.cameraToolbar];
     
     for (UIView *view in views) {
@@ -106,6 +133,11 @@
     self.imagePreview = [UIView new];
     self.topView = [UIToolbar new];
     self.bottomView = [UIToolbar new];
+    
+    //Below for Exercise 41 and Beyond
+    self.cropBox = [BLCCropBox new];
+    //Above for Exercise 41 and Beyond
+    
     self.cameraToolbar = [[BLCCameraToolbar alloc] initWithImageNames:@[@"rotate", @"road"]];
     self.cameraToolbar.delegate = self;
     UIColor *whiteBG = [UIColor colorWithWhite:1.0 alpha:.15];
@@ -115,33 +147,36 @@
     self.bottomView.alpha = 0.5;
 }
 
-- (NSArray *) horizontalLines {
-    if (!_horizontalLines) {
-        _horizontalLines = [self newArrayOfFourWhiteViews];
-    }
-    
-    return _horizontalLines;
-}
+//Below for Exercise 40 only
+//- (NSArray *) horizontalLines {
+//    if (!_horizontalLines) {
+//        _horizontalLines = [self newArrayOfFourWhiteViews];
+//    }
+//    
+//    return _horizontalLines;
+//}
+//
+//- (NSArray *) verticalLines {
+//    if (!_verticalLines) {
+//        _verticalLines = [self newArrayOfFourWhiteViews];
+//    }
+//    
+//    return _verticalLines;
+//}
+//
+//- (NSArray *) newArrayOfFourWhiteViews {
+//    NSMutableArray *array = [NSMutableArray array];
+//    
+//    for (int i = 0; i < 4; i++) {
+//        UIView *view = [UIView new];
+//        view.backgroundColor = [UIColor whiteColor];
+//        [array addObject:view];
+//    }
+//    
+//    return array;
+//}
+//Above for Exercise 40 only
 
-- (NSArray *) verticalLines {
-    if (!_verticalLines) {
-        _verticalLines = [self newArrayOfFourWhiteViews];
-    }
-    
-    return _verticalLines;
-}
-
-- (NSArray *) newArrayOfFourWhiteViews {
-    NSMutableArray *array = [NSMutableArray array];
-    
-    for (int i = 0; i < 4; i++) {
-        UIView *view = [UIView new];
-        view.backgroundColor = [UIColor whiteColor];
-        [array addObject:view];
-    }
-    
-    return array;
-}
 
 #pragma mark - UIAlertViewDelegate
 
@@ -167,22 +202,28 @@
     CGFloat heightOfBottomView = CGRectGetHeight(self.view.frame) - yOriginOfBottomView;
     self.bottomView.frame = CGRectMake(0, yOriginOfBottomView, width, heightOfBottomView);
     
-    CGFloat thirdOfWidth = width / 3;
+    //Below for Exercise 40 only
+//    CGFloat thirdOfWidth = width / 3;
+//    
+//    for (int i = 0; i < 4; i++) {
+//        UIView *horizontalLine = self.horizontalLines[i];
+//        UIView *verticalLine = self.verticalLines[i];
+//        
+//        horizontalLine.frame = CGRectMake(0, (i * thirdOfWidth) + CGRectGetMaxY(self.topView.frame), width, 0.5);
+//        
+//        CGRect verticalFrame = CGRectMake(i * thirdOfWidth, CGRectGetMaxY(self.topView.frame), 0.5, width);
+//        
+//        if (i == 3) {
+//            verticalFrame.origin.x -= 0.5;
+//        }
+//        
+//        verticalLine.frame = verticalFrame;
+//    }
+    //Above for Exercise 40 only
     
-    for (int i = 0; i < 4; i++) {
-        UIView *horizontalLine = self.horizontalLines[i];
-        UIView *verticalLine = self.verticalLines[i];
-        
-        horizontalLine.frame = CGRectMake(0, (i * thirdOfWidth) + CGRectGetMaxY(self.topView.frame), width, 0.5);
-        
-        CGRect verticalFrame = CGRectMake(i * thirdOfWidth, CGRectGetMaxY(self.topView.frame), 0.5, width);
-        
-        if (i == 3) {
-            verticalFrame.origin.x -= 0.5;
-        }
-        
-        verticalLine.frame = verticalFrame;
-    }
+    //Below for Exercise 41 and Beyond
+    self.cropBox.frame = CGRectMake(0, CGRectGetMaxY(self.topView.frame), width, width);
+    //Above for Exercise 41 and Beyond
     
     self.imagePreview.frame = self.view.bounds;
     self.captureVideoPreviewLayer.frame = self.imagePreview.bounds;
@@ -229,7 +270,15 @@
 }
 
 - (void) rightButtonPressedOnToolbar:(BLCCameraToolbar *)toolbar {
-    NSLog(@"Photo library button pressed.");
+    //Below for Exercise 40 only
+//    NSLog(@"Photo library button pressed.");
+    //Above for Exercise 40 only
+    
+    //Below for Exercise 41 and Beyond
+    BLCImageLibraryViewController *imageLibraryVC = [[BLCImageLibraryViewController alloc] init];
+    imageLibraryVC.delegate = self;
+    [self.navigationController pushViewController:imageLibraryVC animated:YES];
+    //Above for Exercise 41 and Beyond
 }
 
 - (void) cameraButtonPressedOnToolbar:(BLCCameraToolbar *)toolbar {
@@ -253,15 +302,21 @@
             image = [image imageWithFixedOrientation];
             image = [image imageResizedToMatchAspectRatioOfSize:self.captureVideoPreviewLayer.bounds.size];
             
-            UIView *leftLine = self.verticalLines.firstObject;
-            UIView *rightLine = self.verticalLines.lastObject;
-            UIView *topLine = self.horizontalLines.firstObject;
-            UIView *bottomLine = self.horizontalLines.lastObject;
+            //Below for Exercise 40 only
+//            UIView *leftLine = self.verticalLines.firstObject;
+//            UIView *rightLine = self.verticalLines.lastObject;
+//            UIView *topLine = self.horizontalLines.firstObject;
+//            UIView *bottomLine = self.horizontalLines.lastObject;
+//            
+//            CGRect gridRect = CGRectMake(CGRectGetMinX(leftLine.frame),
+//                                         CGRectGetMinY(topLine.frame),
+//                                         CGRectGetMaxX(rightLine.frame) - CGRectGetMinX(leftLine.frame),
+//                                         CGRectGetMinY(bottomLine.frame) - CGRectGetMinY(topLine.frame));
+            //Above for Exercise 40 only
             
-            CGRect gridRect = CGRectMake(CGRectGetMinX(leftLine.frame),
-                                         CGRectGetMinY(topLine.frame),
-                                         CGRectGetMaxX(rightLine.frame) - CGRectGetMinX(leftLine.frame),
-                                         CGRectGetMinY(bottomLine.frame) - CGRectGetMinY(topLine.frame));
+            //Below for Exercise 41 and Beyond
+            CGRect gridRect = self.cropBox.frame;
+            //Above for Exercise 41 and Beyond
             
             CGRect cropRect = gridRect;
             cropRect.origin.x = (CGRectGetMinX(gridRect) + (image.size.width - CGRectGetWidth(gridRect)) / 2);
@@ -280,6 +335,14 @@
         }
     }];
 }
+
+//Below for Exercise 41 and Beyond
+#pragma mark - BLCImageLibraryViewControllerDelegate
+
+- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
+    [self.delegate cameraViewController:self didCompleteWithImage:image];
+}
+//Above for Exercise 41 and Beyond
 
 /*
 #pragma mark - Navigation
