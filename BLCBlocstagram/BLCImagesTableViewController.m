@@ -32,6 +32,10 @@
 #import "BLCImageLibraryViewController.h"
 //Above for Exercise 41 and Beyond
 
+//Below for Exercise 42 and Beyond
+#import "BLCPostToInstagramViewController.h"
+//Above for Exercise 42 and Beyond
+
 //Below used Through Exercise 34
 //@interface BLCImagesTableViewController ()
 //Above used Through Exercise 34
@@ -504,6 +508,7 @@
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 40 and Beyond
+
 #pragma mark - Camera, BLCCameraViewControllerDelegate, and BLCImageLibraryViewControllerDelegate
 
 - (void) cameraPressed:(UIBarButtonItem *) sender {
@@ -542,26 +547,53 @@
     return;
 }
 
-- (void) cameraViewController:(BLCCameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image {
-    [cameraViewController dismissViewControllerAnimated:YES completion:^{
-        if (image) {
-            NSLog(@"Got an image!");
-        } else {
-            NSLog(@"Closed without an image.");
-        }
-    }];
+//Below for Exercise 42 and Beyond
+- (void) handleImage:(UIImage *)image withNavigationController:(UINavigationController *)nav {
+    if (image) {
+        BLCPostToInstagramViewController *postVC = [[BLCPostToInstagramViewController alloc] initWithImage:image];
+        
+        [nav pushViewController:postVC animated:YES];
+    } else {
+        [nav dismissViewControllerAnimated:YES completion:nil];
+    }
 }
+//Above for Exercise 42 and Beyond
+
+- (void) cameraViewController:(BLCCameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image {
+    //Below used Through Exercise 41
+//    [cameraViewController dismissViewControllerAnimated:YES completion:^{
+//        if (image) {
+//            NSLog(@"Got an image!");
+//        } else {
+//            NSLog(@"Closed without an image.");
+//        }
+//    }];
+    //Above used Through Exercise 41
+    
+    //Below for Exercise 42 and Beyond
+    [self handleImage:image withNavigationController:cameraViewController.navigationController];
+    //Above for Exercise 42 and Beyond
+}
+
 //Above for Exercise 40 and Beyond
 
 //Below for Exercise 41 and Beyond
 - (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
-    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
-        if (image) {
-            NSLog(@"Got an image!");
-        } else {
-            NSLog(@"Closed without an image.");
-        }
-    }];
+    
+    //Below for Exercise 41 only
+//    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
+//        if (image) {
+//            NSLog(@"Got an image!");
+//        } else {
+//            NSLog(@"Closed without an image.");
+//        }
+//    }];
+    //Above for Exercise 41 only
+    
+    //Below for Exercise 42 and Beyond
+    [self handleImage:image withNavigationController:imageLibraryViewController.navigationController];
+    //Above for Exercise 42 and Beyond
+    
 }
 //Above for Exercise 41 and Beyond
 
