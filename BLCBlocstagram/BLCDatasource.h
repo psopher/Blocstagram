@@ -20,7 +20,7 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 @interface BLCDatasource : NSObject
 
 //Below for Exercise 43 and Beyond
-extern NSString *const BLCImageFinishedNotification;
+//extern NSString *const BLCImageFinishedNotification;
 //Above for Exercise 43 and Beyond
 
 +(instancetype) sharedInstance;
@@ -41,15 +41,15 @@ extern NSString *const BLCImageFinishedNotification;
 //Above for exercise 31 and beyond
 
 //Below for Exercise 37 and Beyond
-- (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
+//- (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
 //Above for Exercise 37 and Beyond
 
 //Below for Exercise 38 and Beyond
-- (void) toggleLikeOnMediaItem:(BLCMedia *)mediaItem;
+//- (void) toggleLikeOnMediaItem:(BLCMedia *)mediaItem;
 //Above for Exercise 38 and Beyond
 
 //Below for Exercise 39 and Beyond
-- (void) commentOnMediaItem:(BLCMedia *)mediaItem withCommentText:(NSString *)commentText;
+//- (void) commentOnMediaItem:(BLCMedia *)mediaItem withCommentText:(NSString *)commentText;
 //Above for Exercise 39 and Beyond
 
 @end

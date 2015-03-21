@@ -11,9 +11,9 @@
 
 //for Exercise 35 and Beyond
 
-@interface BLCMediaFullScreenAnimator : NSObject <UIViewControllerAnimatedTransitioning>
-
-@property (nonatomic, assign) BOOL presenting;
-@property (nonatomic, weak) UIImageView *cellImageView;
-
-@end
+//@interface BLCMediaFullScreenAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+//
+//@property (nonatomic, assign) BOOL presenting;
+//@property (nonatomic, weak) UIImageView *cellImageView;
+//
+//@end

@@ -8,12 +8,12 @@
 
 //For Exercise 40 and Beyond
 
-#import <UIKit/UIKit.h>
-
-@interface UIImage (BLCImageUtilities)
-
-- (UIImage *) imageWithFixedOrientation;
-- (UIImage *) imageResizedToMatchAspectRatioOfSize:(CGSize)size;
-- (UIImage *) imageCroppedToRect:(CGRect)cropRect;
-
-@end
+//#import <UIKit/UIKit.h>
+//
+//@interface UIImage (BLCImageUtilities)
+//
+//- (UIImage *) imageWithFixedOrientation;
+//- (UIImage *) imageResizedToMatchAspectRatioOfSize:(CGSize)size;
+//- (UIImage *) imageCroppedToRect:(CGRect)cropRect;
+//
+//@end

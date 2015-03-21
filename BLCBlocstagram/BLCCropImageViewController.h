@@ -8,21 +8,21 @@
 
 //For Exercise 41 and Beyond
 
-#import <UIKit/UIKit.h>
-#import "BLCMediaFullScreenViewController.h"
-
-@class BLCCropImageViewController;
-
-@protocol BLCCropImageViewControllerDelegate <NSObject>
-
-- (void) cropControllerFinishedWithImage:(UIImage *)croppedImage;
-
-@end
-
-@interface BLCCropImageViewController : BLCMediaFullScreenViewController
-
-- (instancetype) initWithImage:(UIImage *)sourceImage;
-
-@property (nonatomic, weak) NSObject <BLCCropImageViewControllerDelegate> *delegate;
-
-@end
+//#import <UIKit/UIKit.h>
+//#import "BLCMediaFullScreenViewController.h"
+//
+//@class BLCCropImageViewController;
+//
+//@protocol BLCCropImageViewControllerDelegate <NSObject>
+//
+//- (void) cropControllerFinishedWithImage:(UIImage *)croppedImage;
+//
+//@end
+//
+//@interface BLCCropImageViewController : BLCMediaFullScreenViewController
+//
+//- (instancetype) initWithImage:(UIImage *)sourceImage;
+//
+//@property (nonatomic, weak) NSObject <BLCCropImageViewControllerDelegate> *delegate;
+//
+//@end

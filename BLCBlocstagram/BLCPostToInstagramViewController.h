@@ -8,10 +8,10 @@
 
 //For Exercise 42 and Beyond
 
-#import <UIKit/UIKit.h>
-
-@interface BLCPostToInstagramViewController : UIViewController
-
-- (instancetype) initWithImage:(UIImage *)sourceImage;
-
-@end
+//#import <UIKit/UIKit.h>
+//
+//@interface BLCPostToInstagramViewController : UIViewController
+//
+//- (instancetype) initWithImage:(UIImage *)sourceImage;
+//
+//@end

@@ -10,23 +10,23 @@
 #import <UIKit/UIKit.h>
 
 //Below for Exercise 38 and Beyond
-#import "BLCLikeButton.h"
+//#import "BLCLikeButton.h"
 //Above for Exercise 38 and Beyond
 
 //Below for Exercise 37 and Beyond
-typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
-    BLCMediaDownloadStateNeedsImage             = 0,
-    BLCMediaDownloadStateDownloadInProgress     = 1,
-    BLCMediaDownloadStateNonRecoverableError    = 2,
-    BLCMediaDownloadStateHasImage               = 3
-};
+//typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
+//    BLCMediaDownloadStateNeedsImage             = 0,
+//    BLCMediaDownloadStateDownloadInProgress     = 1,
+//    BLCMediaDownloadStateNonRecoverableError    = 2,
+//    BLCMediaDownloadStateHasImage               = 3
+//};
 //Above for Exercise 37 and Beyond
 
 @class BLCUser;
 
-//Below for Exercise 33 and Beyond
+//Below used Through Exercise 33
 //@interface BLCMedia : NSObject
-//Above for Exercise 33 and Beyond
+//Above used Through Exercise 33
 
 //Below for Exercise 34 and Beyond
 @interface BLCMedia : NSObject <NSCoding>
@@ -40,15 +40,15 @@ typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
 @property (nonatomic, strong) NSArray *comments;
 
 //Below for Exercise 37 and Beyond
-@property (nonatomic, assign) BLCMediaDownloadState downloadState;
+//@property (nonatomic, assign) BLCMediaDownloadState downloadState;
 //Above for Exercise 37 and Beyond
 
 //Below for Exercise 38 and Beyond
-@property (nonatomic, assign) BLCLikeState likeState;
+//@property (nonatomic, assign) BLCLikeState likeState;
 //Above for Exercise 38 and Beyond
 
 //Below for Exercise 39 and Beyond
-@property (nonatomic, strong) NSString *temporaryComment;
+//@property (nonatomic, strong) NSString *temporaryComment;
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 33 and beyond
