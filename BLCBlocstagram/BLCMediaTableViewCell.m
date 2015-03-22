@@ -55,6 +55,10 @@
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 //Above for Exercise 35 and Beyond
 
+//Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//@property (nonatomic, strong) UITapGestureRecognizer *doubleTouch;
+//Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
+
 //Below for Exercise 38 and Beyond
 //@property (nonatomic, strong) BLCLikeButton *likeButton;
 //Above for Exercise 38 and Beyond
@@ -91,6 +95,13 @@ static NSParagraphStyle *paragraphStyle;
         self.longPressGestureRecognizer.delegate = self;
         [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
         //Above for Exercise 35 and Beyond
+        
+        //Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//        self.doubleTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTouchFired:)];
+//        self.doubleTouch.numberOfTouchesRequired = 2;
+//        
+//        [self.tapGestureRecognizer requireGestureRecognizerToFail:self.doubleTouch];
+        //Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
         
         self.usernameAndCaptionLabel = [[UILabel alloc] init];
         self.commentLabel = [[UILabel alloc] init];
@@ -475,6 +486,14 @@ static NSParagraphStyle *paragraphStyle;
     return self.isEditing == NO;
 }
 //Above for Exercise 35 and Beyond
+
+//Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//- (void) doubleTouchFired:(UITapGestureRecognizer *)sender {
+//    if (!image) {
+//        self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+//    }
+//}
+//Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
 
 //Below for Exercise 43 and Beyond
 //- (void) createConstraints {

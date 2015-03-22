@@ -26,9 +26,9 @@
             self.mediaURL = standardResolutionImageURL;
             
         //Below for Exercise 37 and Beyond
-//            self.downloadState = BLCMediaDownloadStateNeedsImage;
-//        } else {
-//            self.downloadState = BLCMediaDownloadStateNonRecoverableError;
+            self.downloadState = BLCMediaDownloadStateNeedsImage;
+        } else {
+            self.downloadState = BLCMediaDownloadStateNonRecoverableError;
         //Above for Exercise 37 and Beyond
         }
         
@@ -74,13 +74,13 @@
         self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
         
         //Below for Exercise 37 and Beyond
-//        if (self.image) {
-//            self.downloadState = BLCMediaDownloadStateHasImage;
-//        } else if (self.mediaURL) {
-//            self.downloadState = BLCMediaDownloadStateNeedsImage;
-//        } else {
-//            self.downloadState = BLCMediaDownloadStateNonRecoverableError;
-//        }
+        if (self.image) {
+            self.downloadState = BLCMediaDownloadStateHasImage;
+        } else if (self.mediaURL) {
+            self.downloadState = BLCMediaDownloadStateNeedsImage;
+        } else {
+            self.downloadState = BLCMediaDownloadStateNonRecoverableError;
+        }
         //Above for Exercise 37 and Beyond
         
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];

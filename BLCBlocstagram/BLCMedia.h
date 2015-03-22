@@ -14,12 +14,12 @@
 //Above for Exercise 38 and Beyond
 
 //Below for Exercise 37 and Beyond
-//typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
-//    BLCMediaDownloadStateNeedsImage             = 0,
-//    BLCMediaDownloadStateDownloadInProgress     = 1,
-//    BLCMediaDownloadStateNonRecoverableError    = 2,
-//    BLCMediaDownloadStateHasImage               = 3
-//};
+typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
+    BLCMediaDownloadStateNeedsImage             = 0,
+    BLCMediaDownloadStateDownloadInProgress     = 1,
+    BLCMediaDownloadStateNonRecoverableError    = 2,
+    BLCMediaDownloadStateHasImage               = 3
+};
 //Above for Exercise 37 and Beyond
 
 @class BLCUser;
@@ -40,7 +40,7 @@
 @property (nonatomic, strong) NSArray *comments;
 
 //Below for Exercise 37 and Beyond
-//@property (nonatomic, assign) BLCMediaDownloadState downloadState;
+@property (nonatomic, assign) BLCMediaDownloadState downloadState;
 //Above for Exercise 37 and Beyond
 
 //Below for Exercise 38 and Beyond

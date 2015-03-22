@@ -41,7 +41,7 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 //Above for exercise 31 and beyond
 
 //Below for Exercise 37 and Beyond
-//- (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
+- (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
 //Above for Exercise 37 and Beyond
 
 //Below for Exercise 38 and Beyond

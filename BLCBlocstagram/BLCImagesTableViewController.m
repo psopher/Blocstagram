@@ -366,12 +366,12 @@
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 37 and Beyond
-//- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
-//    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
-//        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
-//    }
-//}
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
+    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}
 //Above for Exercise 37 and Beyond
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -390,9 +390,21 @@
 //    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
     //Above for exercise 27 only
     
+    //Below assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+//    UIImage *image = item.image;
+//    BLCMedia *imageHeight = MAX(image.size.height, 150);
+//    if (image) {
+//        return [BLCMediaTableViewCell heightForMediaItem:imageHeight width:CGRectGetWidth(self.view.frame)];
+//    } else {
+    //Above assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+    
     //Below for exercise 28 and beyond
     return [BLCMediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
     //Above for exercise 28 and beyond
+    
+    //Below assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+//    }
+    //Above assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
 }
 
 //Below for Exercise 35 and Beyond
