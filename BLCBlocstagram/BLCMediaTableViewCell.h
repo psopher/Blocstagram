@@ -11,34 +11,34 @@
 //For exercise 28 and beyond
 
 //Below used Through Exercise 34
-@class BLCMedia;
+//@class BLCMedia;
 //Above used Through Exercise 34
 
 //Below for Exercise 35 and Beyond
-//
-////Below/ for Exercise 35 Through Exercise 38
-//@class BLCMedia, BLCMediaTableViewCell;
-////Above for Exercise 35 Through Exercise 38
-//
-////Below for Exercise 39 and Beyond
+
+//Below/ for Exercise 35 Through Exercise 38
+@class BLCMedia, BLCMediaTableViewCell;
+//Above for Exercise 35 Through Exercise 38
+
+//Below for Exercise 39 and Beyond
 //@class BLCMedia, BLCMediaTableViewCell, BLCComposeCommentView;
-////Above for Exercise 39 and Beyond
-//
-//@protocol BLCMediaTableViewCellDelegate <NSObject>
-//
-//- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
-//- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
-//
-////Below for Exercise 38 and Beyond
+//Above for Exercise 39 and Beyond
+
+@protocol BLCMediaTableViewCellDelegate <NSObject>
+
+- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
+- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
+
+//Below for Exercise 38 and Beyond
 //- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell;
-////Above for Exercise 38 and Beyond
-//
-////Below for Exercise 39 and Beyond
+//Above for Exercise 38 and Beyond
+
+//Below for Exercise 39 and Beyond
 //- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell;
 //- (void) cell:(BLCMediaTableViewCell *)cell didComposeComment:(NSString *)comment;
-////Above for Exercise 39 and Beyond
-//
-//@end
+//Above for Exercise 39 and Beyond
+
+@end
 //Above for Exercise 35 and Beyond
 
 @interface BLCMediaTableViewCell : UITableViewCell
@@ -46,7 +46,7 @@
 @property (nonatomic, strong) BLCMedia *mediaItem;
 
 //Below for Exercise 35 and Beyond
-//@property (nonatomic, weak) id <BLCMediaTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id <BLCMediaTableViewCellDelegate> delegate;
 //Above for Exercise 35 and Beyond
 
 //Below for Exercise 39 and Beyond
