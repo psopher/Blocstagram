@@ -10,6 +10,7 @@
 #import "BLCMedia.h"
 #import "BLCComment.h"
 #import "BLCUser.h"
+#import "BLCDatasource.h"
 
 //For exercise 28 and beyond
 
@@ -194,7 +195,8 @@ static NSParagraphStyle *paragraphStyle;
     if (_mediaItem.image) {
         self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     } else {
-        self.imageHeightConstraint.constant = 0;
+        self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
+//        [[BLCDatasource sharedInstance] downloadImageForMediaItem:_mediaItem];
     }
     //Above for Exercise 33 and beyond
 }
