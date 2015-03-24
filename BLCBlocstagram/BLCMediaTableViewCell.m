@@ -14,6 +14,7 @@
 #import "BLCMedia.h"
 #import "BLCComment.h"
 #import "BLCUser.h"
+#import "BLCDatasource.h"
 
 //Below for Exercise 38 and Beyond
 //#import "BLCLikeButton.h"
@@ -56,7 +57,7 @@
 //Above for Exercise 35 and Beyond
 
 //Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
-//@property (nonatomic, strong) UITapGestureRecognizer *doubleTouch;
+@property (nonatomic, strong) UITapGestureRecognizer *doubleTouch;
 //Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
 
 //Below for Exercise 38 and Beyond
@@ -97,9 +98,11 @@ static NSParagraphStyle *paragraphStyle;
         //Above for Exercise 35 and Beyond
         
         //Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
-//        self.doubleTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTouchFired:)];
-//        self.doubleTouch.numberOfTouchesRequired = 2;
-//        
+        self.doubleTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTouchFired:)];
+        self.doubleTouch.numberOfTouchesRequired = 2;
+        
+        [self addGestureRecognizer:self.doubleTouch];
+        
 //        [self.tapGestureRecognizer requireGestureRecognizerToFail:self.doubleTouch];
         //Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
         
@@ -354,7 +357,7 @@ static NSParagraphStyle *paragraphStyle;
 //        }
         //Above for Exercise 43 and Beyond
     } else {
-        self.imageHeightConstraint.constant = 0;
+        self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
     }
     //Above for Exercise 35 and Beyond
     
@@ -488,11 +491,11 @@ static NSParagraphStyle *paragraphStyle;
 //Above for Exercise 35 and Beyond
 
 //Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
-//- (void) doubleTouchFired:(UITapGestureRecognizer *)sender {
-//    if (!image) {
-//        self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
-//    }
-//}
+- (void) doubleTouchFired:(UITapGestureRecognizer *)sender {
+    if (!self.mediaItem.image) {
+        [[BLCDatasource sharedInstance] downloadImageForMediaItem:self.mediaItem];
+    }
+}
 //Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
 
 //Below for Exercise 43 and Beyond

@@ -72,8 +72,8 @@
         self.user = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(user))];
         self.mediaURL = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(mediaURL))];
         self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
-        
-        //Below for Exercise 37 and Beyond
+//
+//        //Below for Exercise 37 and Beyond
         if (self.image) {
             self.downloadState = BLCMediaDownloadStateHasImage;
         } else if (self.mediaURL) {
@@ -82,7 +82,7 @@
             self.downloadState = BLCMediaDownloadStateNonRecoverableError;
         }
         //Above for Exercise 37 and Beyond
-        
+    
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
         
