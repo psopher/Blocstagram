@@ -112,6 +112,12 @@
                         [self willChangeValueForKey:@"mediaItems"];
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
+                        
+                        if (self.mediaItems > 0){
+                            [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+                                
+                            }];
+                        }
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
