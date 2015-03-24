@@ -12,7 +12,7 @@
 #import "BLCComment.h"
 
 //Below for Exercise 36 and Beyond
-//#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFNetworking.h>
 //Above for Exercise 36 and Beyond
 
 //Below for Exercise 32 and Beyond
@@ -50,7 +50,7 @@
 //Above for Exercise 33 and Beyond
 
 //Below for Exercise 36 and Beyond
-//@property (nonatomic, strong) AFHTTPRequestOperationManager *instagramOperationManager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *instagramOperationManager;
 //Above for Exercise 36 and Beyond
 
 @end
@@ -83,16 +83,16 @@
         //Above for Exercise 32 and 33
         
         //Below for Exercise 36 and Beyond
-//        NSURL *baseURL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
-//        self.instagramOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
-//        
-//        AFJSONResponseSerializer *jsonSerializer = [AFJSONResponseSerializer serializer];
-//        
-//        AFImageResponseSerializer *imageSerializer = [AFImageResponseSerializer serializer];
-//        imageSerializer.imageScale = 1.0;
-//        
-//        AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[jsonSerializer, imageSerializer]];
-//        self.instagramOperationManager.responseSerializer = serializer;
+        NSURL *baseURL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
+        self.instagramOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+        
+        AFJSONResponseSerializer *jsonSerializer = [AFJSONResponseSerializer serializer];
+        
+        AFImageResponseSerializer *imageSerializer = [AFImageResponseSerializer serializer];
+        imageSerializer.imageScale = 1.0;
+        
+        AFCompoundResponseSerializer *serializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[jsonSerializer, imageSerializer]];
+        self.instagramOperationManager.responseSerializer = serializer;
         //Above for Exercise 36 and Beyond
         
         //Below for Exercise 34 and beyond
@@ -388,87 +388,87 @@
         // only try to get the data if there's an access token
         
         //Below used Through Exercise 35
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            // do the network request in the background, so the UI doesn't lock up
-            
-            NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@", self.accessToken];
-            
-            for (NSString *parameterName in parameters) {
-                // for example, if dictionary contains {count: 50}, append `&count=50` to the URL
-                [urlString appendFormat:@"&%@=%@", parameterName, parameters[parameterName]];
-            }
-            
-            NSURL *url = [NSURL URLWithString:urlString];
-            
-            if (url) {
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                
-                NSURLResponse *response;
-                NSError *webError;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&webError];
-                
-                //Below for Exercise 32 only
-//                NSError *jsonError;
-//                NSDictionary *feedDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//            // do the network request in the background, so the UI doesn't lock up
+//            
+//            NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@", self.accessToken];
+//            
+//            for (NSString *parameterName in parameters) {
+//                // for example, if dictionary contains {count: 50}, append `&count=50` to the URL
+//                [urlString appendFormat:@"&%@=%@", parameterName, parameters[parameterName]];
+//            }
+//            
+//            NSURL *url = [NSURL URLWithString:urlString];
+//            
+//            if (url) {
+//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
 //                
-//                if (feedDictionary) {
-                //Above for Exercise 32 only
-                
-                //Below for Exercise 33 and Beyond
-                if (responseData) {
-                    NSError *jsonError;
-                    NSDictionary *feedDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
-                        
-                    if (feedDictionary) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                                // done networking, go back on the main thread
-                            [self parseDataFromFeedDictionary:feedDictionary fromRequestWithParameters:parameters];
-                            if (completionHandler) {
-                                completionHandler(nil);
-                            }
-                        });
-                    } else if (completionHandler) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completionHandler(jsonError);
-                        });
-                    }
-                } else if (completionHandler) {
-                //Above for Exercise 33 and Beyond
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        //Below for Exercise 32 only
-//                        [self parseDataFromFeedDictionary:feedDictionary fromRequestWithParameters:parameters];
-                        //Above for Exercise 32 only
-                        
-                        //Below for Exercise 33 and Beyond
-                        completionHandler(webError);
-                        //Above for Exercise 33 and Beyond
-                    });
-                }
-            }
-        });
+//                NSURLResponse *response;
+//                NSError *webError;
+//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&webError];
+//                
+//                //Below for Exercise 32 only
+////                NSError *jsonError;
+////                NSDictionary *feedDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
+////                
+////                if (feedDictionary) {
+//                //Above for Exercise 32 only
+//                
+//                //Below for Exercise 33 and Beyond
+//                if (responseData) {
+//                    NSError *jsonError;
+//                    NSDictionary *feedDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
+//                        
+//                    if (feedDictionary) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                // done networking, go back on the main thread
+//                            [self parseDataFromFeedDictionary:feedDictionary fromRequestWithParameters:parameters];
+//                            if (completionHandler) {
+//                                completionHandler(nil);
+//                            }
+//                        });
+//                    } else if (completionHandler) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            completionHandler(jsonError);
+//                        });
+//                    }
+//                } else if (completionHandler) {
+//                //Above for Exercise 33 and Beyond
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        
+//                        //Below for Exercise 32 only
+////                        [self parseDataFromFeedDictionary:feedDictionary fromRequestWithParameters:parameters];
+//                        //Above for Exercise 32 only
+//                        
+//                        //Below for Exercise 33 and Beyond
+//                        completionHandler(webError);
+//                        //Above for Exercise 33 and Beyond
+//                    });
+//                }
+//            }
+//        });
         //Above used Through Exercise 35
         
         //Below for Exercise 36 and Beyond
-//        NSMutableDictionary *mutableParameters = [@{@"access_token": self.accessToken} mutableCopy];
-//        
-//        [mutableParameters addEntriesFromDictionary:parameters];
-//        
-//        [self.instagramOperationManager GET:@"users/self/feed"
-//                                 parameters:mutableParameters
-//                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//                                            [self parseDataFromFeedDictionary:responseObject fromRequestWithParameters:parameters];
-//                                            
-//                                            if (completionHandler) {
-//                                                completionHandler(nil);
-//                                            }
-//                                        }
-//                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                        if (completionHandler) {
-//                                            completionHandler(error);
-//                                        }
-//                                    }];
+        NSMutableDictionary *mutableParameters = [@{@"access_token": self.accessToken} mutableCopy];
+        
+        [mutableParameters addEntriesFromDictionary:parameters];
+        
+        [self.instagramOperationManager GET:@"users/self/feed"
+                                 parameters:mutableParameters
+                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                                            [self parseDataFromFeedDictionary:responseObject fromRequestWithParameters:parameters];
+                                            
+                                            if (completionHandler) {
+                                                completionHandler(nil);
+                                            }
+                                        }
+                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        if (completionHandler) {
+                                            completionHandler(error);
+                                        }
+                                    }];
         //Above for Exercise 36 and Beyond
     }
 }
@@ -489,9 +489,9 @@
         if (mediaItem) {
             [tmpMediaItems addObject:mediaItem];
             
-            //Below used Through Exercise 37
-            [self downloadImageForMediaItem:mediaItem];
-            //Above used Through Exercise 37
+            //Below used Through Exercise 36
+//            [self downloadImageForMediaItem:mediaItem];
+            //Above used Through Exercise 36
         }
     }
     
@@ -523,105 +523,114 @@
     //Below for Exercise 34 and Beyond
     if (tmpMediaItems.count > 0) {
         // Write the changes to disk
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
-            NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-            
-            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
-            NSData *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
-            
-            NSError *dataError;
-            BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-            
-            if (!wroteSuccessfully) {
-                NSLog(@"Couldn't write file: %@", dataError);
-            }
-        });
+        [self saveToDisk];
         
     }
     //Above for Exercise 34 and Beyond
+}
+
+- (void) saveToDisk{
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
+        NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+        
+        NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+        NSData *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+    });
+    
 }
 //Above for Exercise 32 and beyond
 
 //Below for Exercise 33 and Beyond
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
-        
-        //Below Used Through Exercise 35
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSURLRequest *request = [NSURLRequest requestWithURL:mediaItem.mediaURL];
-            
-            NSURLResponse *response;
-            NSError *error;
-            NSData *imageData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            if (imageData) {
-                UIImage *image = [UIImage imageWithData:imageData];
-                
-                if (image) {
-                    mediaItem.image = image;
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-                        NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
-                        [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
-                    });
-                }
-            } else {
-                NSLog(@"Error downloading image: %@", error);
-            }
-        });
-        //Above Used Through Exercise 35
+
+//        //Below Used Through Exercise 35
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSURLRequest *request = [NSURLRequest requestWithURL:mediaItem.mediaURL];
+//            
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *imageData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//            if (imageData) {
+//                UIImage *image = [UIImage imageWithData:imageData];
+//                
+//                if (image) {
+//                    mediaItem.image = image;
+//                    
+//                    [self saveToDisk];
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+//                        NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
+//                        [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+//                    });
+//                }
+//            } else {
+//                NSLog(@"Error downloading image: %@", error);
+//            }
+//        });
+//        //Above Used Through Exercise 35
         
         //Below for Exercise 37 and Beyond
-//        mediaItem.downloadState = BLCMediaDownloadStateDownloadInProgress;
+        mediaItem.downloadState = BLCMediaDownloadStateDownloadInProgress;
         //Above for Exercise 37 and Beyond
         
         //Below for Exercise 36 and Beyond
-//        [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString
-//                                 parameters:nil
-//                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                        if ([responseObject isKindOfClass:[UIImage class]]) {
-//                                            mediaItem.image = responseObject;
-//                                            
-//                                            //Below for Exercise 37 and Beyond
-//                                            mediaItem.downloadState = BLCMediaDownloadStateHasImage;
-//                                            //Above for Exercise 37 and Beyond
-//                                            
-//                                            NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-//                                            NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
-//                                            [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
-//                                            
-//                                            //Below for Exercise 37 and Beyond
-//                                        } else {
-//                                            mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
-//                                            //Above for Exercise 37 and Beyond
-//                                        }
-//                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                        NSLog(@"Error downloading image: %@", error);
-//                                        
-//                                        //Below for Exercise 37 and Beyond
-//                                        mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
-//                                        
-//                                        if ([error.domain isEqualToString:NSURLErrorDomain]) {
-//                                            // A networking problem
-//                                            if (error.code == NSURLErrorTimedOut ||
-//                                                error.code == NSURLErrorCancelled ||
-//                                                error.code == NSURLErrorCannotConnectToHost ||
-//                                                error.code == NSURLErrorNetworkConnectionLost ||
-//                                                error.code == NSURLErrorNotConnectedToInternet ||
-//                                                error.code == kCFURLErrorInternationalRoamingOff ||
-//                                                error.code == kCFURLErrorCallIsActive ||
-//                                                error.code == kCFURLErrorDataNotAllowed ||
-//                                                error.code == kCFURLErrorRequestBodyStreamExhausted) {
-//                                                
-//                                                // It might work if we try again
-//                                                mediaItem.downloadState = BLCMediaDownloadStateNeedsImage;
-//                                            }
-//                                        }
-//                                        //Above for Exercise 37 and Beyond
-//                                    }];
+        [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString
+                                 parameters:nil
+                                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                        if ([responseObject isKindOfClass:[UIImage class]]) {
+                                            mediaItem.image = responseObject;
+                                            
+                                            //Below for Exercise 37 and Beyond
+                                            mediaItem.downloadState = BLCMediaDownloadStateHasImage;
+                                            //Above for Exercise 37 and Beyond
+                                            
+                                            NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+                                            NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
+                                            [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+                                            
+                                            //Below for Exercise 37 and Beyond
+                                        } else {
+                                            mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
+                                            //Above for Exercise 37 and Beyond
+                                        }
+                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        NSLog(@"Error downloading image: %@", error);
+                                        
+                                        //Below for Exercise 37 and Beyond
+                                        mediaItem.downloadState = BLCMediaDownloadStateNonRecoverableError;
+                                        
+                                        if ([error.domain isEqualToString:NSURLErrorDomain]) {
+                                            // A networking problem
+                                            if (error.code == NSURLErrorTimedOut ||
+                                                error.code == NSURLErrorCancelled ||
+                                                error.code == NSURLErrorCannotConnectToHost ||
+                                                error.code == NSURLErrorNetworkConnectionLost ||
+                                                error.code == NSURLErrorNotConnectedToInternet ||
+                                                error.code == kCFURLErrorInternationalRoamingOff ||
+                                                error.code == kCFURLErrorCallIsActive ||
+                                                error.code == kCFURLErrorDataNotAllowed ||
+                                                error.code == kCFURLErrorRequestBodyStreamExhausted) {
+                                                
+                                                // It might work if we try again
+                                                mediaItem.downloadState = BLCMediaDownloadStateNeedsImage;
+                                            }
+                                        }
+                                        //Above for Exercise 37 and Beyond
+                                    }];
         //Above for Exercise 36 and Beyond
+>>>>>>> 3270a8ac71a5395ee9f9bd660001c6b4cd3a4338
     }
 }
 //Above for Exercise 33 and Beyond

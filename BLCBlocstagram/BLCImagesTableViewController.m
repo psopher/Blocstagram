@@ -20,8 +20,8 @@
 //Above for exercise 28 and beyond
 
 //Below for Exercise 35 and Beyond
-//#import "BLCMediaFullScreenViewController.h"
-//#import "BLCMediaFullScreenAnimator.h"
+#import "BLCMediaFullScreenViewController.h"
+#import "BLCMediaFullScreenAnimator.h"
 //Above for Exercise 35 and Beyond
 
 //Below for Exercise 40 and Beyond
@@ -41,11 +41,11 @@
 //Above for Exercise 43 and Beyond
 
 //Below used Through Exercise 34
-@interface BLCImagesTableViewController ()
+//@interface BLCImagesTableViewController ()
 //Above used Through Exercise 34
 
 //Below for Exercise 35 and 39
-//@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 //Above for Exercise 35 and 39
 
 //Below for Exercise 40 only
@@ -57,7 +57,7 @@
 //Above for Exercise 41 and Beyond
 
 //Below for Exercise 35 and Beyond
-//@property (nonatomic, weak) UIImageView *lastTappedImageView;
+@property (nonatomic, weak) UIImageView *lastTappedImageView;
 //Above for Exercise 35 and Beyond
 
 //Below for Exercise 39 and Beyond
@@ -342,7 +342,7 @@
     //Above for exercise 28 and beyond
     
     //Below for Exercise 35 and Beyond
-//    cell.delegate = self;
+    cell.delegate = self;
     //Above for Exercise 35 and Beyond
     
     //Below for exercise 28 and beyond
@@ -361,12 +361,12 @@
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 37 and Beyond
-//- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
-//    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
-//        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
-//    }
-//}
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
+    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}
 //Above for Exercise 37 and Beyond
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -385,60 +385,72 @@
 //    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
     //Above for exercise 27 only
     
+    //Below assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+//    UIImage *image = item.image;
+//    BLCMedia *imageHeight = MAX(image.size.height, 150);
+//    if (image) {
+//        return [BLCMediaTableViewCell heightForMediaItem:imageHeight width:CGRectGetWidth(self.view.frame)];
+//    } else {
+    //Above assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+    
     //Below for exercise 28 and beyond
     return [BLCMediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
     //Above for exercise 28 and beyond
+    
+    //Below assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
+//    }
+    //Above assignment for Exercise 37. Stays in code for Exercise 37 and Beyond
 }
 
 //Below for Exercise 35 and Beyond
-//#pragma mark - BLCMediaTableViewCellDelegate
-//
-//- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
-//    self.lastTappedImageView = imageView;
-//    
-//    BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
-//    
-//    //Below used Through Exercise 42
-////    fullScreenVC.transitioningDelegate = self;
-////    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
-//    //Above used Through Exercise 42
-//
-//    //Below for Exercise 43 and Beyond
+#pragma mark - BLCMediaTableViewCellDelegate
+
+- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
+    self.lastTappedImageView = imageView;
+    
+    BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
+    
+    //Below used Through Exercise 42
+    fullScreenVC.transitioningDelegate = self;
+    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
+    //Above used Through Exercise 42
+
+    //Below for Exercise 43 and Beyond
 //    if (isPhone) {
 //        fullScreenVC.transitioningDelegate = self;
 //        fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
 //    } else {
 //        fullScreenVC.modalPresentationStyle = UIModalPresentationFormSheet;
 //    }
-//    //Above for Exercise 43 and Beyond
-//    
-//    [self presentViewController:fullScreenVC animated:YES completion:nil];
-//}
-//
-//- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView {
-//    NSMutableArray *itemsToShare = [NSMutableArray array];
-//    
-//    if (cell.mediaItem.caption.length > 0) {
-//        [itemsToShare addObject:cell.mediaItem.caption];
-//    }
-//    
-//    if (cell.mediaItem.image) {
-//        [itemsToShare addObject:cell.mediaItem.image];
-//    }
-//    
-//    if (itemsToShare.count > 0) {
-//        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-//        [self presentViewController:activityVC animated:YES completion:nil];
-//    }
-//}
-//
-////Below for Exercise 38 and Beyond
+    //Above for Exercise 43 and Beyond
+    
+    [self presentViewController:fullScreenVC animated:YES completion:nil];
+}
+
+- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView {
+    NSMutableArray *itemsToShare = [NSMutableArray array];
+    
+    if (cell.mediaItem.caption.length > 0) {
+        [itemsToShare addObject:cell.mediaItem.caption];
+    }
+    
+    if (cell.mediaItem.image) {
+        [itemsToShare addObject:cell.mediaItem.image];
+    }
+    
+    if (itemsToShare.count > 0) {
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
+}
+
+//Below for Exercise 38 and Beyond
 //- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
 //    [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
 //}
-////Above for Exercise 38 and Beyond
-//
-////Below for Exercise 39 and Beyond
+//Above for Exercise 38 and Beyond
+
+//Below for Exercise 39 and Beyond
 //- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell {
 //    self.lastSelectedCommentView = (UIView *)cell.commentView;
 //}
@@ -446,25 +458,25 @@
 //- (void) cell:(BLCMediaTableViewCell *)cell didComposeComment:(NSString *)comment {
 //    [[BLCDatasource sharedInstance] commentOnMediaItem:cell.mediaItem withCommentText:comment];
 //}
-////Above for Exercise 39 and Beyond
-//
-//#pragma mark - UIViewControllerTransitioningDelegate
-//
-//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-//                                                                  presentingController:(UIViewController *)presenting
-//                                                                      sourceController:(UIViewController *)source {
-//    
-//    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
-//    animator.presenting = YES;
-//    animator.cellImageView = self.lastTappedImageView;
-//    return animator;
-//}
-//
-//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-//    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
-//    animator.cellImageView = self.lastTappedImageView;
-//    return animator;
-//}
+//Above for Exercise 39 and Beyond
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.presenting = YES;
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
 //Above for Exercise 35 and Beyond
 
 //Below for Exercise 39 and Beyond

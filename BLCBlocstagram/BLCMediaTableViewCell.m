@@ -14,6 +14,7 @@
 #import "BLCMedia.h"
 #import "BLCComment.h"
 #import "BLCUser.h"
+#import "BLCDatasource.h"
 
 //Below for Exercise 38 and Beyond
 //#import "BLCLikeButton.h"
@@ -29,11 +30,11 @@
 
 
 //Below used Through Exercise 34
-@interface BLCMediaTableViewCell () 
+//@interface BLCMediaTableViewCell () 
 //Above used Through Exercise 34
 
 //Below for Exercise 35 Through Exercise 38
-//@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
+@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
 //Above for Exercise Through Exercise 38
 
 //Below for Exercise 39 and Beyond
@@ -51,9 +52,13 @@
 //Above for exercise 29 and beyond
 
 //Below for Exercise 35 and Beyond
-//@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-//@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 //Above for Exercise 35 and Beyond
+
+//Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//@property (nonatomic, strong) UITapGestureRecognizer *doubleTouch;
+//Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
 
 //Below for Exercise 38 and Beyond
 //@property (nonatomic, strong) BLCLikeButton *likeButton;
@@ -81,16 +86,23 @@ static NSParagraphStyle *paragraphStyle;
         self.mediaImageView = [[UIImageView alloc] init];
         
         //Below for Exercise 35 and Beyond
-//        self.mediaImageView.userInteractionEnabled = YES;
-//        
-//        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
-//        self.tapGestureRecognizer.delegate = self;
-//        [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
-//        
-//        self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
-//        self.longPressGestureRecognizer.delegate = self;
-//        [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
+        self.mediaImageView.userInteractionEnabled = YES;
+        
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
+        self.tapGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
+        
+        self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
+        self.longPressGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
         //Above for Exercise 35 and Beyond
+        
+        //Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//        self.doubleTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTouchFired:)];
+//        self.doubleTouch.numberOfTouchesRequired = 2;
+//        
+//        [self.tapGestureRecognizer requireGestureRecognizerToFail:self.doubleTouch];
+        //Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
         
         self.usernameAndCaptionLabel = [[UILabel alloc] init];
         self.commentLabel = [[UILabel alloc] init];
@@ -329,22 +341,22 @@ static NSParagraphStyle *paragraphStyle;
     //Above is for Exercise 29 and beyond
     
     //Below for Exercise 35 and Beyond
-//    if (_mediaItem.image) {
-//        
-//        //Below used Through Exercise 42
-////        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-//        //Above used Through Exercise 42
-//        
-//        //Below for Exercise 43 and Beyond
+    if (_mediaItem.image) {
+        
+        //Below used Through Exercise 42
+        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        //Above used Through Exercise 42
+        
+        //Below for Exercise 43 and Beyond
 //        if (isPhone) {
 //            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
 //        } else {
 //            self.imageHeightConstraint.constant = 320;
 //        }
-//        //Above for Exercise 43 and Beyond
-//    } else {
-//        self.imageHeightConstraint.constant = 0;
-//    }
+        //Above for Exercise 43 and Beyond
+    } else {
+        self.imageHeightConstraint.constant = 0;
+    }
     //Above for Exercise 35 and Beyond
     
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
@@ -368,13 +380,13 @@ static NSParagraphStyle *paragraphStyle;
 //    self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     //Above is for Exercise 29 through exercise 32
     
-    //Below for Exercises 33 and 34
-    if (_mediaItem.image) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
-    //Above for Exercises 33 and 34
+    //Below for Exercise 33 and 34
+//    if (_mediaItem.image) {
+//        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+//    } else {
+//        self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
+//    }
+    //Above for Exercise 33 and 34
 }
 
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width {
@@ -457,24 +469,32 @@ static NSParagraphStyle *paragraphStyle;
 //Above for Exercise 39 and Beyond
 
 //Below for Exercise 35 and Beyond
-//#pragma mark - Image View
-//
-//- (void) tapFired:(UITapGestureRecognizer *)sender {
-//    [self.delegate cell:self didTapImageView:self.mediaImageView];
-//}
-//
-//- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
-//    if (sender.state == UIGestureRecognizerStateBegan) {
-//        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
+#pragma mark - Image View
+
+- (void) tapFired:(UITapGestureRecognizer *)sender {
+    [self.delegate cell:self didTapImageView:self.mediaImageView];
+}
+
+- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return self.isEditing == NO;
+}
+//Above for Exercise 35 and Beyond
+
+//Below is Assignment for Exercise 36. Used for Exercise 36 ONLY
+//- (void) doubleTouchFired:(UITapGestureRecognizer *)sender {
+//    if (!image) {
+//        self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
 //    }
 //}
-//
-//#pragma mark - UIGestureRecognizerDelegate
-//
-//- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    return self.isEditing == NO;
-//}
-//Above for Exercise 35 and Beyond
+//Above is Assignment for Exercise 36. Used for Exercise 36 ONLY
 
 //Below for Exercise 43 and Beyond
 //- (void) createConstraints {
