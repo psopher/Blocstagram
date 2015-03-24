@@ -38,6 +38,7 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 //Below for exercise 31 and beyond
 - (void) requestNewItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
+- (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
 //Above for exercise 31 and beyond
 
 //Below for Exercise 37 and Beyond

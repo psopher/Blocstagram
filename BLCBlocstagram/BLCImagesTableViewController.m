@@ -113,12 +113,7 @@
     //Above for Exercise 31 and beyond
     
     //Below is Assignment for Exercise 34. Stays in Code for Exercise 34 and Beyond
-    if (self.images.count > 0) {
-        UIRefreshControl *sender = [[UIRefreshControl alloc] init];
-        [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
-            [sender endRefreshing];
-        }];
-    }
+    
     //I think this method works, but it would be easier if I could just call the refreshControlDidFire: method
     //Above is Assignment for Exercise 34. Stays in Code for Exercise 34 and Beyond
     

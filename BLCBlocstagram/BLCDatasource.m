@@ -112,6 +112,12 @@
                         [self willChangeValueForKey:@"mediaItems"];
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
+                        
+                        if (self.mediaItems > 0){
+                            [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+                                
+                            }];
+                        }
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
@@ -517,31 +523,37 @@
     //Below for Exercise 34 and Beyond
     if (tmpMediaItems.count > 0) {
         // Write the changes to disk
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
-            NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
-            
-            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
-            NSData *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
-            
-            NSError *dataError;
-            BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
-            
-            if (!wroteSuccessfully) {
-                NSLog(@"Couldn't write file: %@", dataError);
-            }
-        });
+        [self saveToDisk];
         
     }
     //Above for Exercise 34 and Beyond
+}
+
+- (void) saveToDisk{
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
+        NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+        
+        NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+        NSData *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+    });
+    
 }
 //Above for Exercise 32 and beyond
 
 //Below for Exercise 33 and Beyond
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
-        
-        //Below Used Through Exercise 35
+
+//        //Below Used Through Exercise 35
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //            NSURLRequest *request = [NSURLRequest requestWithURL:mediaItem.mediaURL];
 //            
@@ -555,6 +567,8 @@
 //                if (image) {
 //                    mediaItem.image = image;
 //                    
+//                    [self saveToDisk];
+//                    
 //                    dispatch_async(dispatch_get_main_queue(), ^{
 //                        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
 //                        NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
@@ -565,7 +579,7 @@
 //                NSLog(@"Error downloading image: %@", error);
 //            }
 //        });
-        //Above Used Through Exercise 35
+//        //Above Used Through Exercise 35
         
         //Below for Exercise 37 and Beyond
         mediaItem.downloadState = BLCMediaDownloadStateDownloadInProgress;

@@ -382,13 +382,13 @@ static NSParagraphStyle *paragraphStyle;
 //    self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     //Above is for Exercise 29 through exercise 32
     
-    //Below for Exercises 33 and 34
+    //Below for Exercise 33 and 34
 //    if (_mediaItem.image) {
 //        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
 //    } else {
-//        self.imageHeightConstraint.constant = 0;
+//        self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
 //    }
-    //Above for Exercises 33 and 34
+    //Above for Exercise 33 and 34
 }
 
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width {
