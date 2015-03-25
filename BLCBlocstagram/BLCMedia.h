@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-//Below for Exercise 38 and Beyond
-//#import "BLCLikeButton.h"
-//Above for Exercise 38 and Beyond
+#import "BLCLikeButton.h"
 
 typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
     BLCMediaDownloadStateNeedsImage             = 0,
@@ -33,9 +31,7 @@ typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
 
 @property (nonatomic, assign) BLCMediaDownloadState downloadState;
 
-//Below for Exercise 38 and Beyond
-//@property (nonatomic, assign) BLCLikeState likeState;
-//Above for Exercise 38 and Beyond
+@property (nonatomic, assign) BLCLikeState likeState;
 
 //Below for Exercise 39 and Beyond
 //@property (nonatomic, strong) NSString *temporaryComment;

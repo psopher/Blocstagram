@@ -21,9 +21,7 @@
 - (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
 - (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
 
-//Below for Exercise 38 and Beyond
-//- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell;
-//Above for Exercise 38 and Beyond
+- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell;
 
 //Below for Exercise 39 and Beyond
 //- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell;

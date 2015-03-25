@@ -317,11 +317,9 @@
     }
 }
 
-//Below for Exercise 38 and Beyond
-//- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
-//    [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
-//}
-//Above for Exercise 38 and Beyond
+- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
+    [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
+}
 
 //Below for Exercise 39 and Beyond
 //- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell {

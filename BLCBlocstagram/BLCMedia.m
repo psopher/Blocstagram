@@ -47,11 +47,9 @@
         
         self.comments = commentsArray;
         
-        //Below for Exercise 38 and Beyond
-//        BOOL userHasLiked = [mediaDictionary[@"user_has_liked"] boolValue];
-//        
-//        self.likeState = userHasLiked ? BLCLikeStateLiked : BLCLikeStateNotLiked;
-        //Above for Exercise 38 and Beyond
+        BOOL userHasLiked = [mediaDictionary[@"user_has_liked"] boolValue];
+        
+        self.likeState = userHasLiked ? BLCLikeStateLiked : BLCLikeStateNotLiked;
     }
     
     return self;
@@ -79,9 +77,7 @@
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
         
-        //Below for Exercise 38 and Beyond
-//        self.likeState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(likeState))];
-        //Above for Exercise 38 and Beyond
+        self.likeState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(likeState))];
     }
     
     return self;
@@ -95,9 +91,7 @@
     [aCoder encodeObject:self.caption forKey:NSStringFromSelector(@selector(caption))];
     [aCoder encodeObject:self.comments forKey:NSStringFromSelector(@selector(comments))];
     
-    //Below for Exercise 38 and Beyond
-//    [aCoder encodeInteger:self.likeState forKey:NSStringFromSelector(@selector(likeState))];
-    //Above for Exercise 38 and Beyond
+    [aCoder encodeInteger:self.likeState forKey:NSStringFromSelector(@selector(likeState))];
     
 }
 
