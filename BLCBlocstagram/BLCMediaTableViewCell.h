@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//For exercise 28 and beyond
-
-//Below used Through Exercise 34
-//@class BLCMedia;
-//Above used Through Exercise 34
-
-//Below for Exercise 35 and Beyond
-
 //Below/ for Exercise 35 Through Exercise 38
 @class BLCMedia, BLCMediaTableViewCell;
 //Above for Exercise 35 Through Exercise 38
@@ -39,15 +31,12 @@
 //Above for Exercise 39 and Beyond
 
 @end
-//Above for Exercise 35 and Beyond
 
 @interface BLCMediaTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) BLCMedia *mediaItem;
 
-//Below for Exercise 35 and Beyond
 @property (nonatomic, weak) id <BLCMediaTableViewCellDelegate> delegate;
-//Above for Exercise 35 and Beyond
 
 //Below for Exercise 39 and Beyond
 //@property (nonatomic, strong, readonly) BLCComposeCommentView *commentView;

@@ -12,7 +12,6 @@
 
 @implementation BLCMedia
 
-//Below for Exercise 33 and Beyond
 - (instancetype) initWithDictionary:(NSDictionary *)mediaDictionary {
     self = [super init];
     
@@ -25,11 +24,9 @@
         if (standardResolutionImageURL) {
             self.mediaURL = standardResolutionImageURL;
             
-        //Below for Exercise 37 and Beyond
             self.downloadState = BLCMediaDownloadStateNeedsImage;
         } else {
             self.downloadState = BLCMediaDownloadStateNonRecoverableError;
-        //Above for Exercise 37 and Beyond
         }
         
         NSDictionary *captionDictionary = mediaDictionary[@"caption"];
@@ -59,9 +56,7 @@
     
     return self;
 }
-//Above for Exercise 33 and Beyond
 
-//Below for Exercise 34 and Beyond
 #pragma mark - NSCoding
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
@@ -72,8 +67,7 @@
         self.user = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(user))];
         self.mediaURL = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(mediaURL))];
         self.image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
-//
-//        //Below for Exercise 37 and Beyond
+
         if (self.image) {
             self.downloadState = BLCMediaDownloadStateHasImage;
         } else if (self.mediaURL) {
@@ -81,7 +75,6 @@
         } else {
             self.downloadState = BLCMediaDownloadStateNonRecoverableError;
         }
-        //Above for Exercise 37 and Beyond
     
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
@@ -107,6 +100,5 @@
     //Above for Exercise 38 and Beyond
     
 }
-//Above for Exercise 34 and Beyond
 
 @end

@@ -9,13 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-//Below for exercise 30 and beyond
 @class BLCMedia;
-//Above for exercise 30 and beyond
 
-//Below for exercise 31 and beyond
 typedef void (^BLCNewItemCompletionBlock)(NSError *error);
-//Abover for exercise 31 and beyond
 
 @interface BLCDatasource : NSObject
 
@@ -26,24 +22,16 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 
-//Below for Exercise 32 and beyond
 @property (nonatomic, strong, readonly) NSString *accessToken;
 + (NSString *) instagramClientID;
-//Above for Exercise 32 and beyond
 
-//Below for exercise 30 and beyond
 - (void) deleteMediaItem:(BLCMedia *)item;
-//Above for exercise 30 and beyond
 
-//Below for exercise 31 and beyond
 - (void) requestNewItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
-//Above for exercise 31 and beyond
 
-//Below for Exercise 37 and Beyond
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem;
-//Above for Exercise 37 and Beyond
 
 //Below for Exercise 38 and Beyond
 //- (void) toggleLikeOnMediaItem:(BLCMedia *)mediaItem;

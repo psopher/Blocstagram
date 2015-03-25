@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//For Exercise 32 and beyond
-
 @interface BLCLoginViewController : UIViewController
 
 extern NSString *const BLCLoginViewControllerDidGetAccessTokenNotification;

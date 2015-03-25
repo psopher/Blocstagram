@@ -11,7 +11,6 @@
 
 @implementation BLCComment
 
-//Below for Exercise 33 and Beyond
 - (instancetype) initWithDictionary:(NSDictionary *)commentDictionary {
     self = [super init];
     
@@ -23,9 +22,6 @@
     
     return self;
 }
-//Above for Exercise 33 and Beyond
-
-//Below for Exercise 34 and Beyond
 #pragma mark - NSCoding
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
@@ -45,6 +41,5 @@
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
     [aCoder encodeObject:self.from forKey:NSStringFromSelector(@selector(from))];
 }
-//Above for Exercise 34 and Beyond
 
 @end

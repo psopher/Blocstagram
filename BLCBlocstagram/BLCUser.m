@@ -10,7 +10,6 @@
 
 @implementation BLCUser
 
-//Below for Exercise 33 and Beyond
 - (instancetype) initWithDictionary:(NSDictionary *)userDictionary {
     self = [super init];
     
@@ -29,9 +28,6 @@
     
     return self;
 }
-//Above for Exercise 33 and Beyond
-
-//Below for Exercise 34 and Beyond
 #pragma mark - NSCoding
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
@@ -55,6 +51,5 @@
     [aCoder encodeObject:self.profilePicture forKey:NSStringFromSelector(@selector(profilePicture))];
     [aCoder encodeObject:self.profilePictureURL forKey:NSStringFromSelector(@selector(profilePictureURL))];
 }
-//Above for Exercise 34 and Beyond
 
 @end

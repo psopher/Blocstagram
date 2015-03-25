@@ -11,21 +11,13 @@
 
 @class BLCUser;
 
-//Below used Through Exercise 33
-//@interface BLCComment : NSObject
-//Above used Through Exercise 33
-
-//Below for Exercise 34 and Beyond
 @interface BLCComment : NSObject <NSCoding>
-//Above for Exercise 34 and Beyond
 
 @property (nonatomic, strong) NSString *idNumber;
 
 @property (nonatomic, strong) BLCUser *from;
 @property (nonatomic, strong) NSString *text;
 
-//Below for Exercise 33 and Beyond
 - (instancetype) initWithDictionary:(NSDictionary *)commentDictionary;
-//Above for Exercise 33 and Beyond
 
 @end

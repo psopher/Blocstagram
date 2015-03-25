@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-//For exercise 32 and beyond
-
 #import "BLCLoginViewController.h"
 #import "BLCDatasource.h"
 
@@ -54,12 +52,9 @@ NSString *const BLCLoginViewControllerDidGetAccessTokenNotification = @"BLCLogin
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [self.webView loadRequest:request];
     }
-    //Below is Assigment for for Exercise 32. Stays in code from exercise 32 and beyond
     self.title = NSLocalizedString(@"Login", @"Login");
-    //Above is Assigment for for Exercise 32. Stays in code from exercise 32 and beyond
 }
 
-//Below is Assigment for for Exercise 32. Stays in code from exercise 32 and beyond
 - (void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -72,8 +67,6 @@ NSString *const BLCLoginViewControllerDidGetAccessTokenNotification = @"BLCLogin
 {
     [[self webView] goBack];
 }
-
-//Above is Assigment for for Exercise 32. Stays in code from exercise 32 and beyond
 
 - (void) dealloc {
     // Removing this line causes a weird flickering effect when you relaunch the app after logging in, as the web view is briefly displayed, automatically authenticates with cookies, returns the access token, and dismisses the login view, sometimes in less than a second.
