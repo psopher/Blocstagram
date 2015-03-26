@@ -35,8 +35,6 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 
 - (void) toggleLikeOnMediaItem:(BLCMedia *)mediaItem;
 
-//Below for Exercise 39 and Beyond
-//- (void) commentOnMediaItem:(BLCMedia *)mediaItem withCommentText:(NSString *)commentText;
-//Above for Exercise 39 and Beyond
+- (void) commentOnMediaItem:(BLCMedia *)mediaItem withCommentText:(NSString *)commentText;
 
 @end
