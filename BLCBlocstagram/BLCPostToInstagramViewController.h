@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-//For Exercise 42 and Beyond
+#import <UIKit/UIKit.h>
 
-//#import <UIKit/UIKit.h>
-//
-//@interface BLCPostToInstagramViewController : UIViewController
-//
-//- (instancetype) initWithImage:(UIImage *)sourceImage;
-//
-//@end
+@interface BLCPostToInstagramViewController : UIViewController
+
+- (instancetype) initWithImage:(UIImage *)sourceImage;
+
+@end
