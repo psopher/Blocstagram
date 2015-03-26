@@ -24,9 +24,7 @@
 
 #import "BLCPostToInstagramViewController.h"
 
-//Below for Exercise 43 and Beyond
-//#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//Above for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 
 @interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate, BLCImageLibraryViewControllerDelegate>
 
@@ -35,9 +33,7 @@
 @property (nonatomic, weak) UIView *lastSelectedCommentView;
 @property (nonatomic, assign) CGFloat lastKeyboardAdjustment;
 
-//Below for Exercise 43 and Beyond
-//@property (nonatomic, strong) UIPopoverController *cameraPopover;
-//Above for Exercise 43 and Beyond
+@property (nonatomic, strong) UIPopoverController *cameraPopover;
 
 @end
 
@@ -81,12 +77,10 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    //Below for Exercise 43 and Beyond
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(imageDidFinish:)
-//                                                 name:BLCImageFinishedNotification
-//                                               object:nil];
-    //Above for Exercise 43 and Beyond
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(imageDidFinish:)
+                                                 name:BLCImageFinishedNotification
+                                               object:nil];
     
 }
 
@@ -241,20 +235,13 @@
     self.lastTappedImageView = imageView;
     
     BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
-    
-    //Below used Through Exercise 42
-    fullScreenVC.transitioningDelegate = self;
-    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
-    //Above used Through Exercise 42
 
-    //Below for Exercise 43 and Beyond
-//    if (isPhone) {
-//        fullScreenVC.transitioningDelegate = self;
-//        fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
-//    } else {
-//        fullScreenVC.modalPresentationStyle = UIModalPresentationFormSheet;
-//    }
-    //Above for Exercise 43 and Beyond
+    if (isPhone) {
+        fullScreenVC.transitioningDelegate = self;
+        fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
+    } else {
+        fullScreenVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
     
     [self presentViewController:fullScreenVC animated:YES completion:nil];
 }
@@ -401,20 +388,14 @@
     
     if (imageVC) {
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
-    
-    //Below Used Through Exercise 42
-    [self presentViewController:nav animated:YES completion:nil];
-    //Above Used Through Exercise 42
         
-    //Below for Exercise 43 and Beyond
-//        if (isPhone) {
-//            [self presentViewController:nav animated:YES completion:nil];
-//        } else {
-//            self.cameraPopover = [[UIPopoverController alloc] initWithContentViewController:nav];
-//            self.cameraPopover.popoverContentSize = CGSizeMake(320, 568);
-//            [self.cameraPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//        }
-    //Above for Exercise 43 and Beyond
+        if (isPhone) {
+            [self presentViewController:nav animated:YES completion:nil];
+        } else {
+            self.cameraPopover = [[UIPopoverController alloc] initWithContentViewController:nav];
+            self.cameraPopover.popoverContentSize = CGSizeMake(320, 568);
+            [self.cameraPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
         
     }
     
@@ -427,18 +408,12 @@
         
         [nav pushViewController:postVC animated:YES];
     } else {
-        //Below for Exercise 42 only
-        [nav dismissViewControllerAnimated:YES completion:nil];
-        //Above for Exercise 42 only
-        
-        //Below for Exercise 43 and Beyond
-//        if (isPhone) {
-//            [nav dismissViewControllerAnimated:YES completion:nil];
-//        } else {
-//            [self.cameraPopover dismissPopoverAnimated:YES];
-//            self.cameraPopover = nil;
-//        }
-        //Above for Exercise 43 and Beyond
+        if (isPhone) {
+            [nav dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self.cameraPopover dismissPopoverAnimated:YES];
+            self.cameraPopover = nil;
+        }
     }
 }
 
@@ -454,17 +429,15 @@
     
 }
 
-//Below for Exercise 43 and Beyond
-//#pragma mark - Popover Handling
-//
-//- (void) imageDidFinish:(NSNotification *)notification {
-//    if (isPhone) {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    } else {
-//        [self.cameraPopover dismissPopoverAnimated:YES];
-//        self.cameraPopover = nil;
-//    }
-//}
-//Above for Exercise 43 and Beyond
+#pragma mark - Popover Handling
+
+- (void) imageDidFinish:(NSNotification *)notification {
+    if (isPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.cameraPopover dismissPopoverAnimated:YES];
+        self.cameraPopover = nil;
+    }
+}
 
 @end

@@ -17,9 +17,7 @@
 
 #import <UICKeyChainStore.h>
 
-//Below for Exercise 43 and Beyond
-//#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//Above for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 
 @interface BLCDatasource ()
 {
@@ -41,9 +39,7 @@
 
 @implementation BLCDatasource
 
-//Below for Exercise 43 and Beyond
-//NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
-//Above for Exercise 43 and Beyond
+NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
 
 + (instancetype) sharedInstance {
     static dispatch_once_t once;
@@ -277,6 +273,12 @@
         }
     });
     
+}
+
+#pragma mark - UIDocumentInteractionControllerDelegate
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:BLCImageFinishedNotification object:self];
 }
 
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem {

@@ -17,9 +17,7 @@
 
 #import "BLCComposeCommentView.h"
 
-//Below for Exercise 43 and Beyond
-//#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//Above for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 
 @interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate, BLCComposeCommentViewDelegate>
 
@@ -91,108 +89,50 @@ static NSParagraphStyle *paragraphStyle;
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
-        //Below for Exercise 39 Through 42
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
-        //Above for Exercise 39 Through 42
+        [self createConstraints];
         
-        //Below for Exercise 29 Through 42
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-        //Above for Exercise 29 Through 42
-        
-        //Below for Exercise 43 and Beyond
-//        [self createConstraints];
-        //Above for Exercise 43 and Beyond
-        
-        //Below for Exercise 38 Through 42
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
-        //Above for Exercise 38 Through 42
-        
-        //Below for Exercise 29 Through 42
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
-        //Above for Exercise 29 Through 42
-        
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-                                          
-        //Below for Exercise 39 Through 42
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
-        //Above for Exercise 39 Through 42
-        
-        //Below for Exercise 29 Through 42
-                                                                                 options:kNilOptions
-                                                                                 metrics:nil
-                                                                                   views:viewDictionary]];
-        
-        self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:368];
-        
-        
-        self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
-                                                                                    attribute:NSLayoutAttributeHeight
-                                                                                    relatedBy:NSLayoutRelationEqual
-                                                                                       toItem:nil
-                                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                                   multiplier:1
-                                                                                     constant:100];
-        
-        self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel
-                                                                         attribute:NSLayoutAttributeHeight
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1
-                                                                          constant:100];
-        
-        [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]];
-        //Above for exercise 29 Through 42
     }
     return self;
 }
 
-//Below for Exercise 43 and Beyond
-//- (void) createCommonConstraints {
-//    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-//    
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
-//                                                                             options:kNilOptions
-//                                                                             metrics:nil
-//                                                                               views:viewDictionary]];
-//    
-//    self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView
-//                                                              attribute:NSLayoutAttributeHeight
-//                                                              relatedBy:NSLayoutRelationEqual
-//                                                                 toItem:nil
-//                                                              attribute:NSLayoutAttributeNotAnAttribute
-//                                                             multiplier:1
-//                                                               constant:100];
-//    
-//    
-//    self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
-//                                                                                attribute:NSLayoutAttributeHeight
-//                                                                                relatedBy:NSLayoutRelationEqual
-//                                                                                   toItem:nil
-//                                                                                attribute:NSLayoutAttributeNotAnAttribute
-//                                                                               multiplier:1
-//                                                                                 constant:100];
-//    
-//    self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel
-//                                                                     attribute:NSLayoutAttributeHeight
-//                                                                     relatedBy:NSLayoutRelationEqual
-//                                                                        toItem:nil
-//                                                                     attribute:NSLayoutAttributeNotAnAttribute
-//                                                                    multiplier:1
-//                                                                      constant:100];
-//    
-//    [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]];
-//}
-//Above for Exercise 43 and Beyond
+- (void) createCommonConstraints {
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
+                                                                             options:kNilOptions
+                                                                             metrics:nil
+                                                                               views:viewDictionary]];
+    
+    self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:1
+                                                               constant:100];
+    
+    
+    self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
+                                                                                attribute:NSLayoutAttributeHeight
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:nil
+                                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                                               multiplier:1
+                                                                                 constant:100];
+    
+    self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1
+                                                                      constant:100];
+    
+    [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]];
+}
 
 + (void)load {
     lightFont = [UIFont fontWithName:@"HelveticaNeue-Thin" size:11];
@@ -253,18 +193,11 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
     
     if (_mediaItem.image) {
-        
-        //Below used Through Exercise 42
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-        //Above used Through Exercise 42
-        
-        //Below for Exercise 43 and Beyond
-//        if (isPhone) {
-//            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-//        } else {
-//            self.imageHeightConstraint.constant = 320;
-//        }
-        //Above for Exercise 43 and Beyond
+        if (isPhone) {
+            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        } else {
+            self.imageHeightConstraint.constant = 320;
+        }
     } else {
         self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
     }
@@ -355,36 +288,34 @@ static NSParagraphStyle *paragraphStyle;
     }
 }
 
-//Below for Exercise 43 and Beyond
-//- (void) createConstraints {
-//    if (isPhone) {
-//        [self createPhoneConstraints];
-//    } else {
-//        [self createPadConstraints];
-//    }
-//    
-//    [self createCommonConstraints];
-//}
-//
-//- (void) createPadConstraints {
-//    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
-//    
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_mediaImageView(==320)]" options:kNilOptions metrics:nil views:viewDictionary]];
-//    [self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:self.contentView
-//                                                                  attribute:NSLayoutAttributeCenterX
-//                                                                  relatedBy:0
-//                                                                     toItem:_mediaImageView
-//                                                                  attribute:NSLayoutAttributeCenterX
-//                                                                 multiplier:1
-//                                                                   constant:0]];
-//    
-//}
-//
-//- (void) createPhoneConstraints {
-//    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
-//    
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-//}
-//Above for Exercise 43 and Beyond
+- (void) createConstraints {
+    if (isPhone) {
+        [self createPhoneConstraints];
+    } else {
+        [self createPadConstraints];
+    }
+    
+    [self createCommonConstraints];
+}
+
+- (void) createPadConstraints {
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_mediaImageView(==320)]" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                  relatedBy:0
+                                                                     toItem:_mediaImageView
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                 multiplier:1
+                                                                   constant:0]];
+    
+}
+
+- (void) createPhoneConstraints {
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
+}
 
 @end

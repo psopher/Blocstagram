@@ -10,13 +10,9 @@
 
 #import "BLCPostToInstagramViewController.h"
 
-//Below for Exercise 43 and Beyond
-//#import "BLCDataSource.h"
-//Above for Exercise 43 and Beyond
+#import "BLCDataSource.h"
 
-//Below for Exercise 43 and Beyond
-//#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//Above for Exercise 43 and Beyond
+#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 
 @interface BLCPostToInstagramViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -32,9 +28,7 @@
 @property (nonatomic, strong) UIButton *sendButton;
 @property (nonatomic, strong) UIBarButtonItem *sendBarButton;
 
-//Below for Exercise 43 and Beyond
-//@property (nonatomic, strong) UIDocumentInteractionController *documentController;
-//Above for Exercise 43 and Beyond
+@property (nonatomic, strong) UIDocumentInteractionController *documentController;
 
 @end
 
@@ -176,68 +170,26 @@
             return;
         }
         
-        //Below used Through Exercise 42
-        UIDocumentInteractionController *documentController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-        documentController.UTI = @"com.instagram.exclusivegram";
-        //Above used Through Exercise 42
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        self.documentController.UTI = @"com.instagram.exclusivegram";
         
-        //Below for Exercise 43 and Beyond
-//        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-//        self.documentController.UTI = @"com.instagram.exclusivegram";
-        //Above for Exercise 43 and Beyond
-        
-        //Below used Through Exercise 42
-        documentController.delegate = self;
-        //Above used Through Exercise 42
-        
-        //Below for Exercise 43 and Beyond
-//        self.documentController.delegate = self;
-        //Above for Exercise 43 and Beyond
+        self.documentController.delegate = self;
         
         NSString *caption = [alertView textFieldAtIndex:0].text;
         
         if (caption.length > 0) {
-            //Below used Through Exercise 42
-            documentController.annotation = @{@"InstagramCaption": caption};
-            //Above used Through Exercise 42
             
-            //Below for Exercise 43 and Beyond
-//            self.documentController.annotation = @{@"InstagramCaption": caption};
-            //Above for Exercise 43 and Beyond
+            self.documentController.annotation = @{@"InstagramCaption": caption};
         }
         
         if (self.sendButton.superview) {
-            //Below used Through Exercise 42
-            [documentController presentOpenInMenuFromRect:self.sendButton.bounds inView:self.sendButton animated:YES];
-            //Above used Through Exercise 42
             
-            //Below for Exercise 43 and Beyond
-//            [self.documentController presentOpenInMenuFromRect:self.sendButton.bounds inView:self.sendButton animated:YES];
-            //Above for Exercise 43 and Beyond
+            [self.documentController presentOpenInMenuFromRect:self.sendButton.bounds inView:self.sendButton animated:YES];
         } else {
-            //Below used Through Exercise 42
-            [documentController presentOpenInMenuFromBarButtonItem:self.sendBarButton animated:YES];
-            //Above used Through Exercise 42
             
-            //Below for Exercise 43 and Beyond
-//            [self.documentController presentOpenInMenuFromBarButtonItem:self.sendBarButton animated:YES];
-            //Above for Exercise 43 and Beyond
+            [self.documentController presentOpenInMenuFromBarButtonItem:self.sendBarButton animated:YES];
         }
     }
-}
-
-#pragma mark - UIDocumentInteractionControllerDelegate
-
-- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
-    
-    //Below for Exercise 42 only
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //Above for Exercise 42 only
-    
-    //Below for Exercise 43 and Beyond
-//    [[NSNotificationCenter defaultCenter] postNotificationName:BLCImageFinishedNotification object:self];
-    //Above for Exercise 43 and Beyond
-    
 }
 
 #pragma mark - UICollectionView delegate and data source
