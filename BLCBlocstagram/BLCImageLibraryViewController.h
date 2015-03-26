@@ -6,20 +6,18 @@
 //
 //
 
-//For Exercise 41 and Beyond
+#import <UIKit/UIKit.h>
 
-//#import <UIKit/UIKit.h>
-//
-//@class BLCImageLibraryViewController;
-//
-//@protocol BLCImageLibraryViewControllerDelegate <NSObject>
-//
-//- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image;
-//
-//@end
-//
-//@interface BLCImageLibraryViewController : UICollectionViewController
-//
-//@property (nonatomic, weak) NSObject <BLCImageLibraryViewControllerDelegate> *delegate;
-//
-//@end
+@class BLCImageLibraryViewController;
+
+@protocol BLCImageLibraryViewControllerDelegate <NSObject>
+
+- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image;
+
+@end
+
+@interface BLCImageLibraryViewController : UICollectionViewController
+
+@property (nonatomic, weak) NSObject <BLCImageLibraryViewControllerDelegate> *delegate;
+
+@end

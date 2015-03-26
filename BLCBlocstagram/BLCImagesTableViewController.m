@@ -20,9 +20,7 @@
 
 #import "BLCCameraViewController.h"
 
-//Below for Exercise 41 and Beyond
-//#import "BLCImageLibraryViewController.h"
-//Above for Exercise 41 and Beyond
+#import "BLCImageLibraryViewController.h"
 
 //Below for Exercise 42 and Beyond
 //#import "BLCPostToInstagramViewController.h"
@@ -32,11 +30,7 @@
 //#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 //Above for Exercise 43 and Beyond
 
-@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
-
-//Below for Exercise 41 and Beyond
-//@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate, BLCImageLibraryViewControllerDelegate>
-//Above for Exercise 41 and Beyond
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate, BLCImageLibraryViewControllerDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
 
@@ -393,30 +387,22 @@
 
 - (void) cameraPressed:(UIBarButtonItem *) sender {
     
-    //Below for Exercise 41 and Beyond
-//    UIViewController *imageVC;
-//    
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-    //Above for Exercise 41 and Beyond
+    UIViewController *imageVC;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
     
     BLCCameraViewController *cameraVC = [[BLCCameraViewController alloc] init];
     cameraVC.delegate = self;
-    
-    //Below for Exercise 40 only
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
-    //Above for Exercise 40 only
         
-    //Below for Exercise 41 and Beyond
-//        imageVC = cameraVC;
-//    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
-//        BLCImageLibraryViewController *imageLibraryVC = [[BLCImageLibraryViewController alloc] init];
-//        imageLibraryVC.delegate = self;
-//        imageVC = imageLibraryVC;
-//    }
-//    
-//    if (imageVC) {
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
-    //Above for Exercise 41 and Beyond
+        imageVC = cameraVC;
+    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        BLCImageLibraryViewController *imageLibraryVC = [[BLCImageLibraryViewController alloc] init];
+        imageLibraryVC.delegate = self;
+        imageVC = imageLibraryVC;
+    }
+    
+    if (imageVC) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
     
     //Below Used Through Exercise 42
     [self presentViewController:nav animated:YES completion:nil];
@@ -432,9 +418,7 @@
 //        }
     //Above for Exercise 43 and Beyond
         
-    //Below for Exercise 41 and Beyond
-//    }
-    //Above for Exercise 41 and Beyond
+    }
     
     return;
 }
@@ -479,25 +463,23 @@
 }
 
 
-//Below for Exercise 41 and Beyond
-//- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
-//    
-//    //Below for Exercise 41 only
-////    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
-////        if (image) {
-////            NSLog(@"Got an image!");
-////        } else {
-////            NSLog(@"Closed without an image.");
-////        }
-////    }];
-//    //Above for Exercise 41 only
-//    
-//    //Below for Exercise 42 and Beyond
+- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
+    
+    //Below for Exercise 41 only
+    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
+        if (image) {
+            NSLog(@"Got an image!");
+        } else {
+            NSLog(@"Closed without an image.");
+        }
+    }];
+    //Above for Exercise 41 only
+    
+    //Below for Exercise 42 and Beyond
 //    [self handleImage:image withNavigationController:imageLibraryViewController.navigationController];
-//    //Above for Exercise 42 and Beyond
-//    
-//}
-//Above for Exercise 41 and Beyond
+    //Above for Exercise 42 and Beyond
+    
+}
 
 //Below for Exercise 43 and Beyond
 //#pragma mark - Popover Handling

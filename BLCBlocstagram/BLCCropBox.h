@@ -6,10 +6,8 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-//For Exercise 41 and beyond
+#import <UIKit/UIKit.h>
 
-//#import <UIKit/UIKit.h>
-//
-//@interface BLCCropBox : UIView
-//
-//@end
+@interface BLCCropBox : UIView
+
+@end

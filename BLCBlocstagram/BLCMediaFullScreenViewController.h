@@ -16,16 +16,12 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
 
-//Below for Exercise 41 and Beyond
-//@property (nonatomic, strong) BLCMedia *media;
-//Above for Exercise 41 and Beyond
+@property (nonatomic, strong) BLCMedia *media;
 
 - (instancetype) initWithMedia:(BLCMedia *)media;
 
 - (void) centerScrollView;
 
-//Below for Exercise 41 and Beyond
-//- (void) recalculateZoomScale;
-//Above for Exercise 41 and Beyond
+- (void) recalculateZoomScale;
 
 @end
