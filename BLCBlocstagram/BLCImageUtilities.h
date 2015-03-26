@@ -6,14 +6,12 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-//For Exercise 40 and Beyond
+#import <UIKit/UIKit.h>
 
-//#import <UIKit/UIKit.h>
-//
-//@interface UIImage (BLCImageUtilities)
-//
-//- (UIImage *) imageWithFixedOrientation;
-//- (UIImage *) imageResizedToMatchAspectRatioOfSize:(CGSize)size;
-//- (UIImage *) imageCroppedToRect:(CGRect)cropRect;
-//
-//@end
+@interface UIImage (BLCImageUtilities)
+
+- (UIImage *) imageWithFixedOrientation;
+- (UIImage *) imageResizedToMatchAspectRatioOfSize:(CGSize)size;
+- (UIImage *) imageCroppedToRect:(CGRect)cropRect;
+
+@end

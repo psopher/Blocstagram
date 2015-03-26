@@ -18,9 +18,7 @@
 #import "BLCMediaFullScreenViewController.h"
 #import "BLCMediaFullScreenAnimator.h"
 
-//Below for Exercise 40 and Beyond
-//#import "BLCCameraViewController.h"
-//Above for Exercise 40 and Beyond
+#import "BLCCameraViewController.h"
 
 //Below for Exercise 41 and Beyond
 //#import "BLCImageLibraryViewController.h"
@@ -34,13 +32,7 @@
 //#define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 //Above for Exercise 43 and Beyond
 
-//Below for Exercise 35 and 39
-@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
-//Above for Exercise 35 and 39
-
-//Below for Exercise 40 only
-//@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
-//Above for Exercise 40 only
+@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate>
 
 //Below for Exercise 41 and Beyond
 //@interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate, BLCCameraViewControllerDelegate, BLCImageLibraryViewControllerDelegate>
@@ -81,13 +73,11 @@
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
-    //Below for Exercise 40 and Beyond
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ||
-//        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
-//        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraPressed:)];
-//        self.navigationItem.rightBarButtonItem = cameraButton;
-//    }
-    //Above for Exercise 40 and Beyond
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ||
+        [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraPressed:)];
+        self.navigationItem.rightBarButtonItem = cameraButton;
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -398,26 +388,25 @@
     } completion:nil];
 }
 
-//Below for Exercise 40 and Beyond
 
-//#pragma mark - Camera, BLCCameraViewControllerDelegate, and BLCImageLibraryViewControllerDelegate
-//
-//- (void) cameraPressed:(UIBarButtonItem *) sender {
-//    
-//    //Below for Exercise 41 and Beyond
+#pragma mark - Camera, BLCCameraViewControllerDelegate, and BLCImageLibraryViewControllerDelegate
+
+- (void) cameraPressed:(UIBarButtonItem *) sender {
+    
+    //Below for Exercise 41 and Beyond
 //    UIViewController *imageVC;
 //    
 //    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//    //Above for Exercise 41 and Beyond
-//    
-//    BLCCameraViewController *cameraVC = [[BLCCameraViewController alloc] init];
-//    cameraVC.delegate = self;
-//    
-//    //Below for Exercise 40 only
-////    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
-//    //Above for Exercise 40 only
-//        
-//    //Below for Exercise 41 and Beyond
+    //Above for Exercise 41 and Beyond
+    
+    BLCCameraViewController *cameraVC = [[BLCCameraViewController alloc] init];
+    cameraVC.delegate = self;
+    
+    //Below for Exercise 40 only
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraVC];
+    //Above for Exercise 40 only
+        
+    //Below for Exercise 41 and Beyond
 //        imageVC = cameraVC;
 //    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
 //        BLCImageLibraryViewController *imageLibraryVC = [[BLCImageLibraryViewController alloc] init];
@@ -427,13 +416,13 @@
 //    
 //    if (imageVC) {
 //        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
-//    //Above for Exercise 41 and Beyond
-//    
-//    //Below Used Through Exercise 42
-////    [self presentViewController:nav animated:YES completion:nil];
-//    //Above Used Through Exercise 42
-//        
-//    //Below for Exercise 43 and Beyond
+    //Above for Exercise 41 and Beyond
+    
+    //Below Used Through Exercise 42
+    [self presentViewController:nav animated:YES completion:nil];
+    //Above Used Through Exercise 42
+        
+    //Below for Exercise 43 and Beyond
 //        if (isPhone) {
 //            [self presentViewController:nav animated:YES completion:nil];
 //        } else {
@@ -441,16 +430,16 @@
 //            self.cameraPopover.popoverContentSize = CGSizeMake(320, 568);
 //            [self.cameraPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 //        }
-//    //Above for Exercise 43 and Beyond
-//        
-//    //Below for Exercise 41 and Beyond
+    //Above for Exercise 43 and Beyond
+        
+    //Below for Exercise 41 and Beyond
 //    }
-//    //Above for Exercise 41 and Beyond
-//    
-//    return;
-//}
-//
-////Below for Exercise 42 and Beyond
+    //Above for Exercise 41 and Beyond
+    
+    return;
+}
+
+//Below for Exercise 42 and Beyond
 //- (void) handleImage:(UIImage *)image withNavigationController:(UINavigationController *)nav {
 //    if (image) {
 //        BLCPostToInstagramViewController *postVC = [[BLCPostToInstagramViewController alloc] initWithImage:image];
@@ -471,25 +460,24 @@
 //        //Above for Exercise 43 and Beyond
 //    }
 //}
-////Above for Exercise 42 and Beyond
-//
-//- (void) cameraViewController:(BLCCameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image {
-//    //Below used Through Exercise 41
-////    [cameraViewController dismissViewControllerAnimated:YES completion:^{
-////        if (image) {
-////            NSLog(@"Got an image!");
-////        } else {
-////            NSLog(@"Closed without an image.");
-////        }
-////    }];
-//    //Above used Through Exercise 41
-//    
-//    //Below for Exercise 42 and Beyond
-//    [self handleImage:image withNavigationController:cameraViewController.navigationController];
-//    //Above for Exercise 42 and Beyond
-//}
+//Above for Exercise 42 and Beyond
 
-//Above for Exercise 40 and Beyond
+- (void) cameraViewController:(BLCCameraViewController *)cameraViewController didCompleteWithImage:(UIImage *)image {
+    //Below used Through Exercise 41
+    [cameraViewController dismissViewControllerAnimated:YES completion:^{
+        if (image) {
+            NSLog(@"Got an image!");
+        } else {
+            NSLog(@"Closed without an image.");
+        }
+    }];
+    //Above used Through Exercise 41
+    
+    //Below for Exercise 42 and Beyond
+//    [self handleImage:image withNavigationController:cameraViewController.navigationController];
+    //Above for Exercise 42 and Beyond
+}
+
 
 //Below for Exercise 41 and Beyond
 //- (void) imageLibraryViewController:(BLCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
