@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-//For Exercise 42 and Beyond
-
 #import "BLCPostToInstagramViewController.h"
 
 #import "BLCDataSource.h"
