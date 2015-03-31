@@ -14,6 +14,7 @@
 #import "BLCDatasource.h"
 
 #import "BLCLikeButton.h"
+#import "BLCMedia.h"
 
 #import "BLCComposeCommentView.h"
 
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTouch;
 
 @property (nonatomic, strong) BLCLikeButton *likeButton;
+@property (nonatomic, strong) UILabel *likeNumber;
 
 @property (nonatomic, strong) BLCComposeCommentView *commentView;
 
@@ -78,10 +80,12 @@ static NSParagraphStyle *paragraphStyle;
         [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
         self.likeButton.backgroundColor = usernameLabelGray;
         
+        self.likeNumber = [[UILabel alloc] init];
+        
         self.commentView = [[BLCComposeCommentView alloc] init];
         self.commentView.delegate = self;
         
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton, self.commentView]) {
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton, self.commentView, self.likeNumber]) {
         
             
             [self.contentView addSubview:view];
@@ -96,8 +100,8 @@ static NSParagraphStyle *paragraphStyle;
 }
 
 - (void) createCommonConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView, _likeNumber);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeNumber(==20)][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
     
@@ -182,6 +186,24 @@ static NSParagraphStyle *paragraphStyle;
     return commentString;
 }
 
+- (NSAttributedString *) likeNumberString {
+    
+    CGFloat likeNumberFontSize = 15;
+    NSInteger likeCount = 0;
+    
+    if (self.likeButton.likeButtonState == BLCLikeStateLiked) {
+        likeCount = likeCount + 1;
+    }
+    
+    likeCount = likeCount;
+    
+    NSString *baseString = [NSString stringWithFormat:@"%ld", likeCount];
+    
+    NSMutableAttributedString *mutableLikeNumberString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:likeNumberFontSize], NSParagraphStyleAttributeName : paragraphStyle}];
+    
+    return mutableLikeNumberString;
+}
+
 - (void) layoutSubviews {
     [super layoutSubviews];
     
@@ -212,6 +234,7 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabel.attributedText = [self commentString];
     
     self.likeButton.likeButtonState = mediaItem.likeState;
+    self.likeNumber.attributedText = [self likeNumberString];
     
     self.commentView.text = mediaItem.temporaryComment;
 }
