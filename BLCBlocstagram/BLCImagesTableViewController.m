@@ -311,20 +311,11 @@
     CGFloat heightToScroll = 0;
     
     CGFloat keyboardY = CGRectGetMinY(keyboardFrameInViewCoordinates);
-    CGFloat commentViewY = CGRectGetMinY(commentViewFrameInViewCoordinates);
+    CGFloat commentViewY = CGRectGetMaxY(commentViewFrameInViewCoordinates);
     CGFloat difference = commentViewY - keyboardY;
     
-    if (difference > 0) {
         heightToScroll += difference;
-    }
-    
-    if (CGRectIntersectsRect(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates)) {
-        // The two frames intersect (the keyboard would block the view)
-        CGRect intersectionRect = CGRectIntersection(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates);
-        heightToScroll += CGRectGetHeight(intersectionRect);
-    }
-    
-    if (heightToScroll > 0) {
+
         contentInsets.bottom += heightToScroll;
         scrollIndicatorInsets.bottom += heightToScroll;
         contentOffset.y += heightToScroll;
@@ -341,7 +332,6 @@
             self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
             self.tableView.contentOffset = contentOffset;
         } completion:nil];
-    }
     
     self.lastKeyboardAdjustment = heightToScroll;
 }

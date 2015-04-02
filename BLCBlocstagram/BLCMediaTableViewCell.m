@@ -101,7 +101,7 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) createCommonConstraints {
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _commentView, _likeNumber);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeNumber(==20)][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeNumber(==50)][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
     
@@ -189,13 +189,13 @@ static NSParagraphStyle *paragraphStyle;
 - (NSAttributedString *) likeNumberString {
     
     CGFloat likeNumberFontSize = 15;
-    NSInteger likeCount = 0;
+    NSInteger likeCount = self.mediaItem.initialLikes;
     
-    if (self.likeButton.likeButtonState == BLCLikeStateLiked) {
-        likeCount = likeCount + 1;
-    }
-    
-    likeCount = likeCount;
+//    if (self.likeButton.likeButtonState == BLCLikeStateLiked) {
+//        likeCount = likeCount + 1;
+//    }
+//    
+//    likeCount = likeCount;
     
     NSString *baseString = [NSString stringWithFormat:@"%ld", likeCount];
     
@@ -218,7 +218,9 @@ static NSParagraphStyle *paragraphStyle;
         if (isPhone) {
             self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
         } else {
+            //This is the assignment solution for exercise 37
             self.imageHeightConstraint.constant = 320;
+            //Above is the assignment solution for exercise 37
         }
     } else {
         self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);

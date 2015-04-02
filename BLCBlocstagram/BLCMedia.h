@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSArray *comments;
+@property (nonatomic) NSInteger initialLikes;
 
 @property (nonatomic, assign) BLCMediaDownloadState downloadState;
 

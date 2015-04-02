@@ -345,7 +345,9 @@ NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
         
         [self.instagramOperationManager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             mediaItem.likeState = BLCLikeStateLiked;
+            mediaItem.initialLikes++;
             [self reloadMediaItem:mediaItem];
+            [self saveToDisk];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             mediaItem.likeState = BLCLikeStateNotLiked;
             [self reloadMediaItem:mediaItem];
@@ -357,7 +359,9 @@ NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
         
         [self.instagramOperationManager DELETE:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             mediaItem.likeState = BLCLikeStateNotLiked;
+            mediaItem.initialLikes--;
             [self reloadMediaItem:mediaItem];
+            [self saveToDisk];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             mediaItem.likeState = BLCLikeStateLiked;
             [self reloadMediaItem:mediaItem];

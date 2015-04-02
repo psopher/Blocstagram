@@ -50,6 +50,10 @@
         BOOL userHasLiked = [mediaDictionary[@"user_has_liked"] boolValue];
         
         self.likeState = userHasLiked ? BLCLikeStateLiked : BLCLikeStateNotLiked;
+        
+        NSDictionary* likesDict = (NSDictionary*) mediaDictionary[@"likes"];
+        
+        self.initialLikes = [likesDict[@"count"] integerValue];
     }
     
     return self;
@@ -78,6 +82,7 @@
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
         
         self.likeState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(likeState))];
+        self.initialLikes = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(initialLikes))];
     }
     
     return self;
@@ -92,6 +97,7 @@
     [aCoder encodeObject:self.comments forKey:NSStringFromSelector(@selector(comments))];
     
     [aCoder encodeInteger:self.likeState forKey:NSStringFromSelector(@selector(likeState))];
+    [aCoder encodeInteger:self.initialLikes forKey:NSStringFromSelector(@selector(initialLikes))];
     
 }
 
