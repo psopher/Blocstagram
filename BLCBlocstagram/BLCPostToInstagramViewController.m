@@ -396,6 +396,37 @@
             [self addCIImageToCollectionView:composite.outputImage withFilterTitle:NSLocalizedString(@"Film", @"Film Filter")];
         }
     }];
+    
+    //Color Cube Filter
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        CIFilter *colorCubeFilter = [CIFilter filterWithName:@"CIColorCube"];
+        
+        if (colorCubeFilter) {
+            [colorCubeFilter setValue:sourceCIImage forKey:kCIInputImageKey];
+            [self addCIImageToCollectionView:colorCubeFilter.outputImage withFilterTitle:NSLocalizedString(@"Color Cube", @"Color Cube Filter")];
+        }
+    }];
+    
+    //Alpha Mask and Pinch Filters
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        CIFilter *alphaMaskFilter = [CIFilter filterWithName:@"CIMaskToAlpha"];
+        CIFilter *hueAdjustFilter = [CIFilter filterWithName:@"CIHueAdjust"];
+        
+        if (alphaMaskFilter) {
+            [alphaMaskFilter setValue:sourceCIImage forKey:kCIInputImageKey];
+            
+            CIImage *result = alphaMaskFilter.outputImage;
+            
+            if (hueAdjustFilter) {
+                [hueAdjustFilter setValue:result forKeyPath:kCIInputImageKey];
+                result = hueAdjustFilter.outputImage;
+            }
+            
+            [self addCIImageToCollectionView:result withFilterTitle:NSLocalizedString(@"Hue Adjust Mask", @"Hue Adjust and Alpha Mask Filter")];
+        }
+    }];
 }
 
 
