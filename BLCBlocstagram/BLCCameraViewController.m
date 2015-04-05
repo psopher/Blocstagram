@@ -12,6 +12,7 @@
 #import "BLCImageUtilities.h"
 #import "BLCCropBox.h"
 #import "BLCImageLibraryViewController.h"
+#import "BLCImageCategory.h"
 
 
 @interface BLCCameraViewController () <BLCCameraToolbarDelegate, UIAlertViewDelegate, BLCImageLibraryViewControllerDelegate>

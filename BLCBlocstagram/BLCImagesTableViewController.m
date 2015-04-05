@@ -35,6 +35,10 @@
 
 @property (nonatomic, strong) UIPopoverController *cameraPopover;
 
+//Below is Assignment for Exercise 43
+@property (nonatomic, strong) UIPopoverController *cellPopover;
+//Above is Assignment for Exercise 43
+
 @end
 
 @implementation BLCImagesTableViewController
@@ -259,9 +263,30 @@
     
     if (itemsToShare.count > 0) {
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-        [self presentViewController:activityVC animated:YES completion:nil];
+        
+        if (isPhone) {
+            [self presentViewController:activityVC animated:YES completion:nil];
+        } else {
+            self.cellPopover = [[UIPopoverController alloc] initWithContentViewController:cell];
+            self.cellPopover.popoverContentSize = CGSizeMake(320, 568);
+            [self.cellPopover presentPopoverFromBarButtonItem:imageView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
     }
 }
+
+//Below is Assignment for Exercise 43
+//-(void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation duration: (NSTimeInterval) duration {
+//    [self updateLayoutForNewOrientation: interfaceOrientation];
+//}
+//
+//- (void) updateLayoutForNewOrientation: (UIInterfaceOrientation) orientation {
+//    if (UIInterfaceOrientationIsLandscape(orientation)) {
+//        // Do some stuff
+//    } else {
+//        // Do some other stuff
+//    }
+//}
+//Above is Assignment for Exercise 43
 
 - (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
     [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
