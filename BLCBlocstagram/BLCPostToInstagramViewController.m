@@ -411,20 +411,23 @@
     //Alpha Mask and Pinch Filters
     
     [self.photoFilterOperationQueue addOperationWithBlock:^{
-        CIFilter *alphaMaskFilter = [CIFilter filterWithName:@"CIMaskToAlpha"];
+        CIFilter *alphaMaskFilter = [CIFilter filterWithName:@"CIPhotoEffectTonal"];
         CIFilter *hueAdjustFilter = [CIFilter filterWithName:@"CIHueAdjust"];
         
         if (alphaMaskFilter) {
             [alphaMaskFilter setValue:sourceCIImage forKey:kCIInputImageKey];
             
             CIImage *result = alphaMaskFilter.outputImage;
-            
+        
             if (hueAdjustFilter) {
                 [hueAdjustFilter setValue:result forKeyPath:kCIInputImageKey];
-                result = hueAdjustFilter.outputImage;
-            }
+                 result = hueAdjustFilter.outputImage;
             
-            [self addCIImageToCollectionView:result withFilterTitle:NSLocalizedString(@"Hue Adjust Mask", @"Hue Adjust and Alpha Mask Filter")];
+
+            }
+            [self addCIImageToCollectionView:result withFilterTitle:NSLocalizedString(@"Hue Adjust Tonal", @"Hue Adjust and Tonal Effect Filter")];
+        
+
         }
     }];
 }

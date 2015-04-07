@@ -10,7 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "BLCCropImageViewController.h"
 
-@interface BLCImageLibraryViewController () <BLCCropImageViewControllerDelegate>
+@interface BLCImageLibraryViewController () <BLCCropImageViewControllerDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) ALAssetsLibrary *library;
 
@@ -49,6 +49,8 @@
     UIImage *cancelImage = [UIImage imageNamed:@"x"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
+//    self.
+    self.collectionView.delegate = self;
 }
 
 - (void) cancelPressed:(UIBarButtonItem *)sender {
@@ -69,6 +71,27 @@
     flowLayout.minimumLineSpacing = 0;
     flowLayout.headerReferenceSize = CGSizeMake(width, 30);
 }
+
+//This is for assignment 41, but it looks crappy so we commented it out
+//-(CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    ALAsset *asset = self.arraysOfAssets[indexPath.section][indexPath.row];
+//    ALAssetRepresentation *representation = asset.defaultRepresentation;
+//    CGImageRef imageRef = representation.fullResolutionImage;
+//    
+//    UIImage *imageToCrop;
+//    
+//    if (imageRef) {
+//        imageToCrop = [UIImage imageWithCGImage:imageRef scale:representation.scale orientation:(UIImageOrientation)representation.orientation];
+//    }
+//    
+//    CGFloat widthRatio = imageToCrop.size.width / [UIScreen mainScreen].bounds.size.width;
+//    
+//    NSLog(@"image dimensions: %f %f", imageToCrop.size.width / widthRatio, imageToCrop.size.height / widthRatio);
+//    
+//    return CGSizeMake(imageToCrop.size.width / widthRatio, imageToCrop.size.height/ widthRatio);
+//    
+//}
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
