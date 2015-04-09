@@ -38,6 +38,8 @@
 		57A63C031ABA527C00412100 /* BLCCropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A63C021ABA527C00412100 /* BLCCropImageViewController.m */; };
 		57A63C081ABA557400412100 /* BLCImageLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A63C071ABA557400412100 /* BLCImageLibraryViewController.m */; };
 		57A63C0C1ABA612900412100 /* BLCPostToInstagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A63C0B1ABA612900412100 /* BLCPostToInstagramViewController.m */; };
+		57DDA9441AD6041F00561E9E /* BLCUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DDA9431AD6041F00561E9E /* BLCUserTests.m */; };
+		57DDA9471AD6054900561E9E /* BLCCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DDA9461AD6054900561E9E /* BLCCommentTests.m */; };
 		57EABB6D1A9EB2A100FF2807 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */; };
 		57EF375F1AB5F17C00957533 /* BLCMediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EF375E1AB5F17C00957533 /* BLCMediaFullScreenViewController.m */; };
 		57EF37621AB5FA2400957533 /* BLCMediaFullScreenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EF37611AB5FA2400957533 /* BLCMediaFullScreenAnimator.m */; };
@@ -109,6 +111,10 @@
 		57A63C091ABA559D00412100 /* BLCImageLibraryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLCImageLibraryViewController.h; sourceTree = "<group>"; };
 		57A63C0A1ABA612900412100 /* BLCPostToInstagramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCPostToInstagramViewController.h; sourceTree = "<group>"; };
 		57A63C0B1ABA612900412100 /* BLCPostToInstagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCPostToInstagramViewController.m; sourceTree = "<group>"; };
+		57DDA9421AD6041F00561E9E /* BLCUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCUserTests.h; sourceTree = "<group>"; };
+		57DDA9431AD6041F00561E9E /* BLCUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCUserTests.m; sourceTree = "<group>"; };
+		57DDA9451AD6054900561E9E /* BLCCommentTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCCommentTests.h; sourceTree = "<group>"; };
+		57DDA9461AD6054900561E9E /* BLCCommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCommentTests.m; sourceTree = "<group>"; };
 		57EABB6B1A9EB2A100FF2807 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
 		57EABB6C1A9EB2A100FF2807 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
 		57EF375D1AB5F17C00957533 /* BLCMediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaFullScreenViewController.h; sourceTree = "<group>"; };
@@ -221,6 +227,10 @@
 			isa = PBXGroup;
 			children = (
 				5779BB281A864F4D00B77796 /* BLCBlocstagramTests.m */,
+				57DDA9421AD6041F00561E9E /* BLCUserTests.h */,
+				57DDA9431AD6041F00561E9E /* BLCUserTests.m */,
+				57DDA9451AD6054900561E9E /* BLCCommentTests.h */,
+				57DDA9461AD6054900561E9E /* BLCCommentTests.m */,
 				5779BB261A864F4D00B77796 /* Supporting Files */,
 			);
 			path = BLCBlocstagramTests;
@@ -440,7 +450,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57DDA9441AD6041F00561E9E /* BLCUserTests.m in Sources */,
 				5779BB291A864F4D00B77796 /* BLCBlocstagramTests.m in Sources */,
+				57DDA9471AD6054900561E9E /* BLCCommentTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
