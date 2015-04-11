@@ -10,6 +10,8 @@
 
 #import "BLCDataSource.h"
 
+#import "BLCCollectionViewCellSubclass.h"
+
 #define isPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 
 @interface BLCPostToInstagramViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, UIDocumentInteractionControllerDelegate>
