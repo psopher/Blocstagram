@@ -7,8 +7,6 @@
 //
 
 #import "BLCCollectionViewCellSubclass.h"
-#import "BLCPostToInstagramViewController.h"
-#import "BLCPostToInstagramViewController.m"
 
 @implementation BLCCollectionViewCellSubclass
 
