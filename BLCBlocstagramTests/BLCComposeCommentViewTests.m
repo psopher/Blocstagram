@@ -7,7 +7,21 @@
 //
 
 #import "BLCComposeCommentViewTests.h"
+#import "BLCComposeCommentView.h"
 
 @implementation BLCComposeCommentViewTests
+
+//- (void)testThatInitializationWorks
+//{
+//    NSDictionary *sourceDictionary = @{@"YES": @"YES",
+//                                       @"NO" : @"NO"};
+//    
+//    BLCComposeCommentView *testCompose = [[BLCComposeCommentView alloc] initWithDictionary:sourceDictionary];
+//    
+//    
+//    
+//    XCTAssertTrue(testCompose.isWritingComment, sourceDictionary[@"YES"], @"It should be yes when text is being written");
+//    XCTAssertTrue(testCompose.isWritingComment, sourceDictionary[@"YES"], @"It should be yes when text is being written");
+//}
 
 @end

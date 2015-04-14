@@ -246,12 +246,10 @@ static NSParagraphStyle *paragraphStyle;
     
     layoutCell.mediaItem = mediaItem;
     
-    //Below is for Exercise 29 and beyond
     layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
     
     [layoutCell setNeedsLayout];
     [layoutCell layoutIfNeeded];
-    //Above is for Exercise 29 and beyond
     
     return CGRectGetMaxY(layoutCell.commentView.frame);
 }

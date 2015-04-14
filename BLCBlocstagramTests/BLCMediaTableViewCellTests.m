@@ -7,7 +7,17 @@
 //
 
 #import "BLCMediaTableViewCellTests.h"
+#import "BLCMediaTableViewCell.h"
 
 @implementation BLCMediaTableViewCellTests
+
+//- (void)testThatInitializationWorks
+//{
+//    NSDictionary *sourceDictionary = @{@"height": @500};
+//    
+//    BLCMediaTableViewCell *testHeight = [[BLCMediaTableViewCell alloc] initWithDictionary:sourceDictionary];
+//    
+//    XCTAssertEqualObjects(testHeight.layout.commentView.frame, sourceDictionary[@"height"], @"The height should be equal");
+//}
 
 @end
