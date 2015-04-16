@@ -277,9 +277,8 @@
             self.cellPopover.popoverContentSize = CGSizeMake(320, 568);
             self.cellPopover.delegate = self;
             
-            [self.cellPopover presentPopoverFromRect:frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [self.cellPopover presentPopoverFromRect:frame inView:cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             
-//            self.cellPopover presentPopoverFromBarButtonItem:<#(UIBarButtonItem *)#> permittedArrowDirections:<#(UIPopoverArrowDirection)#> animated:<#(BOOL)#>
         }
     }
 
@@ -290,66 +289,15 @@
         BLCMediaTableViewCell* cell = (BLCMediaTableViewCell*)[self.tableView cellForRowAtIndexPath: [ self.tableView indexPathForSelectedRow]];
     
         CGFloat width = CGRectGetWidth(self.view.frame);
-        CGFloat height = CGRectGetHeight(self.view.frame);
-    
-        CGRect frame;
-    
-
-    
-//        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)){
-                *rect = CGRectMake((width - cell.mediaImageView.frame.size.width)/2, cell.mediaImageView.frame.origin.y, cell.mediaImageView.frame.size.width, cell.mediaImageView.frame.size.height);
-//            }
-//            else{
-//                rect = CGRectMake((width - cell.mediaImageView.frame.size.width)/2, cell.mediaImageView.frame.origin.y, cell.mediaImageView.frame.size.width, cell.mediaImageView.frame.size.height);
-//            }
-    
-    
-    
-}
-
-//Below is Assignment for Exercise 43
-
-//-(void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation duration: (NSTimeInterval) duration {
-//    
-//    if (self.cellPopover && self.cellPopover.isPopoverVisible){
-//        [self.cellPopover dismissPopoverAnimated:false];
-//        
-//        BLCMediaTableViewCell* cell = (BLCMediaTableViewCell*)[self.tableView cellForRowAtIndexPath: [ self.tableView indexPathForSelectedRow]];
-//        
-//        CGFloat width = CGRectGetWidth(self.view.frame);
 //        CGFloat height = CGRectGetHeight(self.view.frame);
-//        
-//        CGRect frame;
-//        
-//        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)){
-//            frame = CGRectMake((width - cell.mediaImageView.frame.size.width)/2, cell.mediaImageView.frame.origin.y, cell.mediaImageView.frame.size.width, cell.mediaImageView.frame.size.height);
-//        }
-//        else{
-//            frame = CGRectMake((width - cell.mediaImageView.frame.size.width)/2, cell.mediaImageView.frame.origin.y, cell.mediaImageView.frame.size.width, cell.mediaImageView.frame.size.height);
-//        }
-//
-//        [self presentPopover: cell withFrame:frame];
-//    }
-//}
-
-- (void) updateLayoutForNewOrientation: (UIInterfaceOrientation) orientation {
-    
-    CGFloat width = CGRectGetWidth(self.view.frame);
-//    CGFloat height = CGRectGetHeight(self.view.frame);
 //    
-//    CGFloat edgeSize = MIN(width, height);
-//    CGFloat yOrigin = (edgeSize - height)/2);
-//    CGFloat xOrigin = (edgeSize - width)/2);
-//
-//    if (UIInterfaceOrientationIsLandscape(orientation)) {
-//        
-//        self.cellPopover.view.frame = CGRectMake((width - self.cellPopover.view.frame.size.width) / 2, self.cellPopover.view.frame.origin.y, self.cellPopover.view.frame.size.width, self.cellPopover.view.frame.size.height);
-//
-//    } else {
-//        self.cellPopover.frame = CGRectMake(xOrigin, yOrigin, edgeSize, edgeSize);
-//    }
+//        CGRect frame;
+    
+                *rect = CGRectMake((width - cell.mediaImageView.frame.size.width)/2, rect->origin.y, cell.mediaImageView.frame.size.width, cell.mediaImageView.frame.size.height);
+    
+    
+    
 }
-//Above is Assignment for Exercise 43
 
 - (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
     [[BLCDatasource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
