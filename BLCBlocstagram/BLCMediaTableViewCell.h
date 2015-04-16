@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong, readonly) BLCComposeCommentView *commentView;
 
+@property (nonatomic, strong) UIImageView *mediaImageView;
+
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width;
 
 - (void) stopComposingComment;
